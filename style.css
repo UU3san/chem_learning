@@ -1068,3 +1068,242 @@ footer{text-align:center;color:var(--muted);padding:18px}
   .cu-deposit-target{right:8px;width:34px;height:34px;font-size:.72rem}
   .solution-fade-note{width:94px;font-size:.56rem;right:4px}
 }
+
+
+/* ===== Ver.5.4 ===== */
+
+/* --- Daniell: Cu must move toward and remain on the copper plate --- */
+.plate-deposit-point{
+  position:absolute;
+  left:-16px;
+  top:86px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#d98342;
+  border:2px solid #a95220;
+  color:#fff;
+  font-weight:900;
+  font-size:.72rem;
+  opacity:0;
+  z-index:6;
+}
+
+/* Cu atom now travels toward the actual electrode surface (to the right in the lane),
+   then visually merges into the plate marker instead of continuing into the beaker. */
+#daniell .battery-card.story-step-4 .cu-atom{
+  animation:cuAtomIntoPlateV54 4.4s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .plate-deposit-point{
+  animation:plateDepositAppearV54 4.4s ease-in-out infinite!important;
+}
+
+@keyframes cuAtomIntoPlateV54{
+  0%,44%{opacity:0;transform:translateX(-8px) scale(.7)}
+  56%{opacity:1;transform:translateX(0) scale(1)}
+  72%{opacity:1;transform:translateX(30px) scale(.9)}
+  82%,100%{opacity:0;transform:translateX(38px) scale(.72)}
+}
+@keyframes plateDepositAppearV54{
+  0%,64%{opacity:0;transform:scale(.55)}
+  76%,92%{opacity:1;transform:scale(1)}
+  100%{opacity:.65;transform:scale(1)}
+}
+
+/* Remove previous floating target behavior completely */
+.cu-deposit-target{display:none!important}
+
+/* --- Volta: Zn metal -> Zn2+ in solution, electrons move through Zn plate to wire --- */
+.volta-zn-reaction-lane{
+  position:absolute;
+  left:68px;
+  top:92px;
+  width:190px;
+  height:145px;
+  z-index:10;
+  pointer-events:none;
+}
+.volta-zn-source,
+.volta-zn-ion{
+  position:absolute;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  box-shadow:0 4px 12px rgba(30,80,120,.12);
+}
+.volta-zn-source{
+  left:15px;
+  top:28px;
+  background:#c8d0d7;
+  border:2px solid #78858f;
+  color:#26343e;
+}
+.volta-zn-ion{
+  left:78px;
+  top:82px;
+  background:#e8edf0;
+  border:2px solid #8698a6;
+  color:#334e5f;
+  opacity:0;
+}
+.volta-zn-arrow{
+  position:absolute;
+  left:58px;
+  top:58px;
+  color:#456a80;
+  font-weight:900;
+  opacity:0;
+  transform:rotate(35deg);
+}
+.volta-electron-path{
+  position:absolute;
+  left:15px;
+  top:-34px;
+  width:62px;
+  height:104px;
+  opacity:0;
+}
+.volta-electron-path .path-line{
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:5px;
+  height:90px;
+  transform:translateX(-50%);
+  border-radius:999px;
+  background:linear-gradient(to top,#667784,#404c57);
+}
+.volta-electron-path .path-line::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-7px;
+  width:13px;
+  height:13px;
+  border-top:4px solid #404c57;
+  border-right:4px solid #404c57;
+  transform:translateX(-50%) rotate(-45deg);
+}
+.volta-electron-path .path-label{
+  position:absolute;
+  left:42px;
+  top:14px;
+  width:90px;
+  padding:3px 5px;
+  border-radius:7px;
+  background:rgba(255,255,255,.9);
+  color:#4b5f6d;
+  font-size:.54rem;
+  font-weight:900;
+  line-height:1.2;
+}
+.volta-released-electrons{
+  position:absolute;
+  left:28px;
+  top:56px;
+  display:flex;
+  gap:4px;
+  opacity:0;
+}
+.volta-released-electrons span{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#1777cc;
+  color:#fff;
+  font-size:.62rem;
+  font-weight:900;
+  box-shadow:0 0 0 2px rgba(255,255,255,.55);
+}
+.volta-reaction-label{
+  position:absolute;
+  left:55px;
+  bottom:0;
+  white-space:nowrap;
+  background:rgba(255,255,255,.9);
+  border:1px solid #cfdce5;
+  border-radius:8px;
+  padding:3px 7px;
+  font-size:.68rem;
+  font-weight:900;
+  opacity:0;
+}
+
+/* When volta runs, show Zn dissolution + electron movement through metal */
+#volta .battery-card.running .volta-zn-source{
+  animation:voltaZnAtomV54 5.2s ease-in-out infinite;
+}
+#volta .battery-card.running .volta-zn-ion{
+  animation:voltaZnIonV54 5.2s ease-in-out infinite;
+}
+#volta .battery-card.running .volta-zn-arrow{
+  animation:voltaZnArrowV54 5.2s ease-in-out infinite;
+}
+#volta .battery-card.running .volta-electron-path{
+  animation:voltaMetalPathV54 5.2s ease-in-out infinite;
+}
+#volta .battery-card.running .volta-released-electrons{
+  animation:voltaElectronsThroughMetalV54 5.2s ease-in-out infinite;
+}
+#volta .battery-card.running .volta-reaction-label{
+  animation:voltaReactionLabelV54 5.2s ease-in-out infinite;
+}
+
+/* Keep the generic background Zn2+ ions quieter so the new ion is clear */
+#volta .battery-card.running .zn-ions span{
+  animation:none!important;
+  opacity:.45;
+}
+
+@keyframes voltaZnAtomV54{
+  0%,14%{opacity:1;transform:translate(0,0) scale(1)}
+  32%{opacity:1;transform:translate(10px,18px) scale(.95)}
+  48%,100%{opacity:0;transform:translate(48px,48px) scale(.78)}
+}
+@keyframes voltaZnIonV54{
+  0%,38%{opacity:0;transform:translate(-18px,-12px) scale(.75)}
+  52%,82%{opacity:1;transform:translate(0,0) scale(1)}
+  100%{opacity:.2;transform:translate(18px,20px) scale(.9)}
+}
+@keyframes voltaZnArrowV54{
+  0%,26%{opacity:0}
+  38%,62%{opacity:1}
+  76%,100%{opacity:0}
+}
+@keyframes voltaMetalPathV54{
+  0%,28%{opacity:0}
+  38%,82%{opacity:.9}
+  100%{opacity:0}
+}
+@keyframes voltaElectronsThroughMetalV54{
+  0%,28%{opacity:0;transform:translateY(0)}
+  40%{opacity:1;transform:translateY(0)}
+  76%{opacity:1;transform:translateY(-96px)}
+  90%,100%{opacity:0;transform:translateY(-112px)}
+}
+@keyframes voltaReactionLabelV54{
+  0%,30%{opacity:0}
+  42%,82%{opacity:1}
+  100%{opacity:0}
+}
+
+@media(max-width:760px){
+  .volta-zn-reaction-lane{
+    left:32px;
+    top:84px;
+    width:155px;
+  }
+  .volta-zn-source{left:6px}
+  .volta-zn-ion{left:60px}
+  .volta-electron-path{left:5px}
+  .volta-released-electrons{left:18px}
+  .volta-reaction-label{left:34px;font-size:.56rem}
+  .volta-electron-path .path-label{width:72px;font-size:.47rem}
+}

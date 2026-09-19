@@ -12,7 +12,7 @@
     <div class="brand">
       <div class="brand-icon" aria-hidden="true">⚡</div>
       <div>
-        <h1>電池とイオンを動かして学ぼう <span class="version-badge">Ver.5.3</span></h1>
+        <h1>電池とイオンを動かして学ぼう <span class="version-badge">Ver.5.4</span></h1>
         <p>中学生向け｜イオン → ボルタ電池 → ダニエル電池 → 比較 → 確認テスト</p>
       </div>
     </div>
@@ -121,9 +121,21 @@
 
           <div class="beaker single">
             <div class="solution-label">うすい硫酸</div>
-            <div class="electrode zinc-electrode">
+            <div class="electrode zinc-electrode volta-zinc-electrode">
               <span class="sign minus">−</span>
               <strong>Zn</strong><small>亜鉛</small>
+            </div>
+
+            <div class="volta-zn-reaction-lane" aria-label="ボルタ電池で亜鉛板のZn原子がZn2+になり電子2個が金属板内を上へ移動するアニメーション">
+              <div class="volta-zn-source">Zn</div>
+              <div class="volta-zn-arrow">→</div>
+              <div class="volta-zn-ion">Zn²⁺</div>
+              <div class="volta-electron-path">
+                <span class="path-line"></span>
+                <span class="path-label">金属板の中を上へ</span>
+              </div>
+              <div class="volta-released-electrons"><span>e⁻</span><span>e⁻</span></div>
+              <div class="volta-reaction-label">Zn → Zn²⁺ + 2e⁻</div>
             </div>
             <div class="electrode copper-electrode">
               <span class="sign plus">＋</span>
@@ -226,6 +238,7 @@
             <div class="electrode copper-electrode">
               <span class="sign plus">＋</span><strong>Cu</strong><small>銅</small>
               <div class="deposit" aria-hidden="true"></div>
+              <div class="plate-deposit-point" aria-hidden="true">Cu</div>
             </div>
             <div class="solution-label">硫酸銅水溶液</div>
             <div class="cu-reaction-lane" id="cuReactionLane" aria-label="銅イオンが電子を受け取り銅原子になって銅板に付着するアニメーション">
@@ -233,8 +246,7 @@
               <div class="cu-electrons"><span>e⁻</span><span>e⁻</span></div>
               <div class="cu-reaction-arrow">＋ 2e⁻ →</div>
               <div class="cu-atom">Cu</div>
-              <div class="cu-deposit-target">Cu</div>
-              <div class="cu-caption">Cu原子になって<br>銅板に付着</div>
+                            <div class="cu-caption">Cu原子になって<br>銅板に付着</div>
             </div>
             <div class="ions cu-ions cu-background-ions"><span>Cu²⁺</span><span>Cu²⁺</span><span>Cu²⁺</span></div>
             <div class="ions daniell-sulfate right-sulfate"><span>SO₄²⁻</span><span>SO₄²⁻</span></div>
@@ -327,7 +339,7 @@
 </main>
 
   <footer>
-    <p>中学化学 学習Webアプリ Ver.5.3 ｜ GitHub Pages対応</p>
+    <p>中学化学 学習Webアプリ Ver.5.4 ｜ GitHub Pages対応</p>
   </footer>
 
   <script src="app.js"></script>
