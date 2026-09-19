@@ -1521,3 +1521,398 @@ footer{text-align:center;color:var(--muted);padding:18px}
   .attach-electrons{left:34px}
   .attached-cu-layer{right:-5px}
 }
+
+
+/* ===== Ver.5.6 FINAL OVERRIDES ===== */
+
+/* -------------------------------------------------------
+   VOLTA Zn: anchored directly on the actual Zn electrode.
+   This intentionally does not reuse old Volta selectors.
+   ------------------------------------------------------- */
+#volta .volta-zinc-same-animation{
+  display:none!important;
+}
+
+.volta-zinc-electrode{
+  overflow:visible!important;
+}
+
+.volta-zinc-demo{
+  position:absolute;
+  left:0;
+  top:0;
+  width:72px;
+  height:230px;
+  z-index:30;
+  pointer-events:none;
+}
+
+.vz-atom,
+.vz-ion{
+  position:absolute;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:.75rem;
+  font-weight:900;
+  box-shadow:0 3px 8px rgba(20,60,90,.18);
+}
+.vz-atom{
+  left:16px;
+  top:112px;
+  background:#d2d8dd;
+  border:2px solid #707c85;
+  color:#26343e;
+  opacity:0;
+}
+.vz-ion{
+  left:82px;
+  top:142px;
+  background:#edf1f3;
+  border:2px solid #879aa8;
+  color:#334e5f;
+  opacity:0;
+}
+.vz-ion-arrow{
+  position:absolute;
+  left:58px;
+  top:130px;
+  color:#456a80;
+  font-weight:900;
+  opacity:0;
+  transform:rotate(25deg);
+}
+.vz-electrons{
+  position:absolute;
+  left:17px;
+  top:105px;
+  display:flex;
+  gap:2px;
+  opacity:0;
+}
+.vz-electrons span{
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#1777cc;
+  color:white;
+  font-size:.53rem;
+  font-weight:900;
+  box-shadow:0 0 0 2px rgba(255,255,255,.58);
+}
+.vz-metal-path{
+  position:absolute;
+  left:34px;
+  top:22px;
+  width:4px;
+  height:105px;
+  border-radius:999px;
+  background:linear-gradient(to top,#6f7e89,#404c57);
+  opacity:0;
+}
+.vz-metal-path::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-5px;
+  width:11px;
+  height:11px;
+  border-top:3px solid #404c57;
+  border-right:3px solid #404c57;
+  transform:translateX(-50%) rotate(-45deg);
+}
+.vz-note{
+  position:absolute;
+  left:74px;
+  bottom:20px;
+  white-space:nowrap;
+  padding:3px 6px;
+  border-radius:7px;
+  background:rgba(255,255,255,.92);
+  border:1px solid #ccd9e2;
+  font-size:.61rem;
+  font-weight:900;
+  opacity:0;
+}
+
+/* Same sequence as the Daniell step-2 concept:
+   Zn atom at metal surface -> Zn2+ into solution;
+   e- remain in metal and go upward to the wire.
+*/
+#volta .battery-card.running .vz-atom{
+  animation:vzAtomV56 5.4s ease-in-out infinite!important;
+}
+#volta .battery-card.running .vz-ion{
+  animation:vzIonV56 5.4s ease-in-out infinite!important;
+}
+#volta .battery-card.running .vz-ion-arrow{
+  animation:vzArrowV56 5.4s ease-in-out infinite!important;
+}
+#volta .battery-card.running .vz-electrons{
+  animation:vzElectronsV56 5.4s ease-in-out infinite!important;
+}
+#volta .battery-card.running .vz-metal-path{
+  animation:vzPathV56 5.4s ease-in-out infinite!important;
+}
+#volta .battery-card.running .vz-note{
+  animation:vzNoteV56 5.4s ease-in-out infinite!important;
+}
+
+@keyframes vzAtomV56{
+  0%,12%{opacity:1;transform:translate(0,0) scale(1)}
+  30%{opacity:1;transform:translate(10px,12px) scale(.95)}
+  44%,100%{opacity:0;transform:translate(44px,31px) scale(.78)}
+}
+@keyframes vzIonV56{
+  0%,34%{opacity:0;transform:translate(-32px,-18px) scale(.72)}
+  48%,78%{opacity:1;transform:translate(0,0) scale(1)}
+  100%{opacity:.18;transform:translate(15px,16px) scale(.9)}
+}
+@keyframes vzArrowV56{
+  0%,24%{opacity:0}
+  34%,60%{opacity:1}
+  75%,100%{opacity:0}
+}
+@keyframes vzElectronsV56{
+  0%,27%{opacity:0;transform:translateY(0)}
+  38%{opacity:1;transform:translateY(0)}
+  74%{opacity:1;transform:translateY(-92px)}
+  88%,100%{opacity:0;transform:translateY(-110px)}
+}
+@keyframes vzPathV56{
+  0%,27%{opacity:0}
+  36%,80%{opacity:.9}
+  100%{opacity:0}
+}
+@keyframes vzNoteV56{
+  0%,30%{opacity:0}
+  42%,82%{opacity:1}
+  100%{opacity:0}
+}
+
+/* -------------------------------------------------------
+   DANIELL STEP 4: explicit Cu2+ -> Cu atom -> attachment.
+   ------------------------------------------------------- */
+
+/* Hide old generic lane animation; the actual plate-anchored demo is primary. */
+#daniell .battery-card.story-step-4 #cuReactionLane{
+  opacity:.22!important;
+}
+#daniell .battery-card.story-step-4 #cuReactionLane *{
+  animation:none!important;
+}
+
+/* Place demo entirely on solution-side of the plate, ending exactly at plate surface. */
+.cu-plate-attachment{
+  position:absolute!important;
+  left:-155px!important;
+  top:72px!important;
+  width:160px!important;
+  height:96px!important;
+  z-index:40!important;
+  overflow:visible!important;
+}
+
+.attach-cu2,
+.attach-cu-atom{
+  position:absolute!important;
+  top:30px!important;
+  width:44px!important;
+  height:44px!important;
+  border-radius:50%!important;
+  display:grid!important;
+  place-items:center!important;
+  font-weight:900!important;
+}
+.attach-cu2{
+  left:0!important;
+  background:#d8edff!important;
+  border:2px solid #459bd9!important;
+  color:#135f96!important;
+  opacity:0;
+}
+.attach-cu-atom{
+  left:67px!important;
+  background:#e3a064!important;
+  border:2px solid #a95220!important;
+  color:#fff!important;
+  opacity:0;
+}
+.attach-electrons{
+  position:absolute!important;
+  left:42px!important;
+  top:3px!important;
+  display:flex!important;
+  gap:3px!important;
+  opacity:0;
+}
+.attach-electrons span{
+  width:25px!important;
+  height:25px!important;
+  border-radius:50%!important;
+  display:grid!important;
+  place-items:center!important;
+  background:#1777cc!important;
+  color:#fff!important;
+  font-size:.54rem!important;
+  font-weight:900!important;
+}
+.attach-equals,
+.attach-to-plate{
+  position:absolute;
+  top:42px;
+  font-weight:900;
+  color:#3f6278;
+  opacity:0;
+}
+.attach-equals{left:50px}
+.attach-to-plate{left:114px}
+
+/* The final Cu labels sit on the LEFT face of the actual copper plate. */
+.attached-cu-layer{
+  position:absolute!important;
+  right:-5px!important;
+  top:19px!important;
+  width:20px!important;
+  height:64px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  gap:2px!important;
+}
+.attached-cu-layer i{
+  display:grid!important;
+  place-items:center!important;
+  width:18px!important;
+  height:18px!important;
+  border-radius:50%!important;
+  background:#c96f31!important;
+  border:2px solid #98501f!important;
+  color:#fff!important;
+  font-style:normal!important;
+  font-size:.42rem!important;
+  font-weight:900!important;
+  opacity:0;
+}
+
+/* Sequence is deliberately slow and obvious. */
+#daniell .battery-card.story-step-4 .attach-cu2{
+  animation:cu2ApproachV56 6.2s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attach-electrons{
+  animation:electronsMeetCuV56 6.2s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attach-equals{
+  animation:arrowShowV56 6.2s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attach-cu-atom{
+  animation:cuAtomVisibleThenAttachV56 6.2s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attach-to-plate{
+  animation:attachArrowV56 6.2s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attached-cu-layer i:nth-child(1){
+  animation:cuStaysOnPlateV56 6.2s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attached-cu-layer i:nth-child(2){
+  animation:cuStaysOnPlateV56 6.2s .14s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attached-cu-layer i:nth-child(3){
+  animation:cuStaysOnPlateV56 6.2s .28s ease-in-out infinite!important;
+}
+
+@keyframes cu2ApproachV56{
+  0%,12%{opacity:1;transform:translateX(0)}
+  30%,38%{opacity:1;transform:translateX(35px)}
+  48%,100%{opacity:0;transform:translateX(48px) scale(.78)}
+}
+@keyframes electronsMeetCuV56{
+  0%,20%{opacity:0;transform:translateY(-15px)}
+  28%,42%{opacity:1;transform:translateY(9px)}
+  50%,100%{opacity:0;transform:translateY(14px)}
+}
+@keyframes arrowShowV56{
+  0%,25%{opacity:0}
+  32%,50%{opacity:1}
+  60%,100%{opacity:0}
+}
+@keyframes cuAtomVisibleThenAttachV56{
+  0%,43%{opacity:0;transform:translateX(0) scale(.72)}
+  52%,66%{opacity:1;transform:translateX(0) scale(1)}
+  78%,88%{opacity:1;transform:translateX(36px) scale(.92)}
+  94%,100%{opacity:0;transform:translateX(43px) scale(.82)}
+}
+@keyframes attachArrowV56{
+  0%,55%{opacity:0}
+  65%,84%{opacity:1}
+  92%,100%{opacity:0}
+}
+@keyframes cuStaysOnPlateV56{
+  0%,74%{opacity:0;transform:scale(.65)}
+  84%,100%{opacity:1;transform:scale(1)}
+}
+
+/* -------------------------------------------------------
+   DANIELL STEP 5: actual beaker solution fades once and stays light.
+   ------------------------------------------------------- */
+#daniell .copper-half{
+  background:linear-gradient(to top,rgba(40,145,220,.42) 0 70%,transparent 70%)!important;
+}
+#daniell .battery-card.story-step-5 .copper-half{
+  animation:cuSolutionFadeOnceV56 7s linear forwards!important;
+}
+@keyframes cuSolutionFadeOnceV56{
+  0%{
+    background:linear-gradient(to top,rgba(40,145,220,.42) 0 70%,transparent 70%);
+  }
+  25%{
+    background:linear-gradient(to top,rgba(70,160,218,.34) 0 70%,transparent 70%);
+  }
+  50%{
+    background:linear-gradient(to top,rgba(105,180,225,.27) 0 70%,transparent 70%);
+  }
+  75%{
+    background:linear-gradient(to top,rgba(135,198,232,.21) 0 70%,transparent 70%);
+  }
+  100%{
+    background:linear-gradient(to top,rgba(165,215,240,.14) 0 70%,transparent 70%);
+  }
+}
+
+/* Cu2+ ions disappear gradually once and remain reduced. */
+#daniell .battery-card.story-step-5 .cu-background-ions span:nth-child(1){
+  animation:cuIonReduceOnceV56 7s linear forwards!important;
+}
+#daniell .battery-card.story-step-5 .cu-background-ions span:nth-child(2){
+  animation:cuIonReduceOnceV56 7s .7s linear forwards!important;
+}
+#daniell .battery-card.story-step-5 .cu-background-ions span:nth-child(3){
+  animation:cuIonReduceOnceV56 7s 1.4s linear forwards!important;
+}
+@keyframes cuIonReduceOnceV56{
+  from{opacity:1}
+  to{opacity:.08}
+}
+
+@media(max-width:760px){
+  .volta-zinc-demo{width:58px;height:190px}
+  .vz-atom{left:9px;top:90px}
+  .vz-ion{left:62px;top:118px}
+  .vz-electrons{left:10px;top:84px}
+  .vz-metal-path{left:27px;top:16px;height:88px}
+  .vz-note{left:58px;bottom:12px;font-size:.5rem}
+
+  .cu-plate-attachment{
+    left:-122px!important;
+    width:128px!important;
+  }
+  .attach-cu2{width:36px!important;height:36px!important;font-size:.65rem!important}
+  .attach-cu-atom{left:53px!important;width:36px!important;height:36px!important;font-size:.65rem!important}
+  .attach-electrons{left:33px!important}
+  .attach-equals{left:41px!important}
+  .attach-to-plate{left:91px!important}
+}
