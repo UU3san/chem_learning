@@ -102,13 +102,15 @@ function resetDaniellStory(){
 
 function runDaniellStory(){
   resetDaniellStory();
+
   const stages=[
     [0,1,'① まず、ZnSO₄とCuSO₄は水の中でイオンに分かれています。'],
-    [2500,2,'② 亜鉛Znが電子を2個出して、Zn²⁺として水溶液中へ入ります。'],
-    [5200,3,'③ 出た電子e⁻は、導線を通って亜鉛板から銅板へ流れます。'],
-    [8000,4,'④ Cu²⁺が銅板へ近づき、e⁻を2個受け取ってCu原子になり、銅板に付着します。'],
-    [11500,5,'⑤ Cu²⁺が減っていくので、硫酸銅水溶液の青色がだんだん薄くなります。']
+    [4200,2,'② 亜鉛Znが電子を2個出して、Zn²⁺として水溶液中へ入ります。'],
+    [8400,3,'③ 出た電子e⁻は、導線を通って亜鉛板から銅板へ流れます。'],
+    [12600,4,'④ Cu²⁺が銅板へ近づき、e⁻を2個受け取ってCu原子になり、銅板に付着します。'],
+    [17400,5,'⑤ Cu²⁺が減っていくので、硫酸銅水溶液の青色がだんだん薄くなります。']
   ];
+
   stages.forEach(([delay,step,msg])=>{
     daniellStoryTimers.push(setTimeout(()=>{
       setDaniellStoryStep(step,msg);
@@ -120,28 +122,6 @@ function runDaniellStory(){
 document.querySelectorAll('.action').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const a=btn.dataset.action;
-    if(a==='ionize'){
-      const atom=document.getElementById('zincAtom');
-      const wrap=document.getElementById('zincIonWrap');
-      const ionBtn=document.getElementById('ionizeBtn');
-      if(!atom || !wrap) return;
-      ionBtn.disabled=true;
-      atom.classList.remove('ionizing');
-      wrap.classList.add('hidden');
-      requestAnimationFrame(()=>requestAnimationFrame(()=>{
-        atom.classList.add('ionizing');
-        setTimeout(()=>{
-          atom.classList.add('hidden');
-          wrap.classList.remove('hidden');
-          ionBtn.disabled=false;
-        },650);
-      }));
-      speak('亜鉛原子が電子を2個失うと、亜鉛イオンZn2プラスになります。右のeマイナス2個が、亜鉛から出た電子です。');
-    }
-    if(a==='reset-ion'){
-      resetIonDemo();
-      speechSynthesis.cancel();
-    }
     
     if(a==='run-volta'){
       setRunning('#volta .battery-card',true);
@@ -150,6 +130,25 @@ document.querySelectorAll('.action').forEach(btn=>{
     if(a==='reset-volta'){ setRunning('#volta .battery-card',false); speechSynthesis.cancel(); }
     if(a==='run-daniell-story'){ runDaniellStory(); }
     if(a==='reset-daniell-story'){ resetDaniellStory(); speechSynthesis.cancel(); }
+  });
+});
+
+
+const daniellStoryMessages = {
+  1:'① まず、ZnSO₄とCuSO₄は水の中でイオンに分かれています。',
+  2:'② 亜鉛Znが電子を2個出して、Zn²⁺として水溶液中へ入ります。',
+  3:'③ 出た電子e⁻は、導線を通って亜鉛板から銅板へ流れます。',
+  4:'④ Cu²⁺が銅板へ近づき、e⁻を2個受け取ってCu原子になり、銅板に付着します。',
+  5:'⑤ Cu²⁺が減っていくので、硫酸銅水溶液の青色がだんだん薄くなります。'
+};
+
+document.querySelectorAll('#daniellStoryProgress .story-step').forEach(stepBtn=>{
+  stepBtn.addEventListener('click',()=>{
+    const step=Number(stepBtn.dataset.story);
+    clearDaniellStoryTimers(); // manual operation pauses automatic playback
+    const message=daniellStoryMessages[step];
+    setDaniellStoryStep(step,message);
+    speak(message);
   });
 });
 

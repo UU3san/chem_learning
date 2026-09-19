@@ -570,3 +570,92 @@ footer{text-align:center;color:var(--muted);padding:18px}
     transform:translateX(-50%) !important;
   }
 }
+
+
+/* ===== Ver.5 ===== */
+
+/* Ion animation restored to automatic loop */
+.ion-loop-card{overflow:hidden}
+.ion-auto-stage{min-height:230px}
+.ion-cycle{
+  position:relative;
+  width:100%;
+  min-height:180px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+}
+.auto-zinc,.auto-arrow,.auto-ion-result{will-change:opacity,transform}
+.auto-zinc{animation:autoZnAtomV5 7s ease-in-out infinite!important}
+.auto-arrow{animation:autoArrowV5 7s ease-in-out infinite!important}
+.auto-ion-result{opacity:0;animation:autoIonResultV5 7s ease-in-out infinite!important}
+.auto-zinc .auto-e1{animation:autoElectronLeaveV5 7s ease-in-out infinite!important}
+.auto-zinc .auto-e2{animation:autoElectronLeave2V5 7s ease-in-out infinite!important}
+.auto-released span{animation:autoReleasedGlowV5 7s ease-in-out infinite!important}
+
+@keyframes autoZnAtomV5{
+  0%,16%{opacity:1;transform:scale(1)}
+  31%,64%{opacity:.12;transform:scale(.92)}
+  78%,100%{opacity:1;transform:scale(1)}
+}
+@keyframes autoArrowV5{
+  0%,14%{opacity:.25}
+  24%,64%{opacity:1;transform:translateX(4px)}
+  78%,100%{opacity:.25;transform:none}
+}
+@keyframes autoIonResultV5{
+  0%,22%{opacity:0;transform:translateX(-15px) scale(.94)}
+  34%,64%{opacity:1;transform:none}
+  76%,100%{opacity:0;transform:translateX(10px) scale(.96)}
+}
+@keyframes autoElectronLeaveV5{
+  0%,14%{opacity:1;transform:none}
+  30%,64%{opacity:0;transform:translate(175px,-42px) scale(.9)}
+  78%,100%{opacity:1;transform:none}
+}
+@keyframes autoElectronLeave2V5{
+  0%,14%{opacity:1;transform:none}
+  30%,64%{opacity:0;transform:translate(175px,42px) scale(.9)}
+  78%,100%{opacity:1;transform:none}
+}
+@keyframes autoReleasedGlowV5{
+  0%,24%{opacity:0;transform:scale(.7)}
+  36%,62%{opacity:1;transform:scale(1)}
+  76%,100%{opacity:0;transform:scale(.7)}
+}
+
+/* Daniell story controls are now teacher-clickable */
+.story-step{
+  appearance:none;
+  width:100%;
+  cursor:pointer;
+  font:inherit;
+}
+.story-step:hover{
+  border-color:#7eaed2;
+  background:#f1f8ff;
+}
+.story-step:focus-visible{
+  outline:3px solid rgba(15,90,166,.25);
+  outline-offset:2px;
+}
+.story-help{
+  text-align:center;
+  color:var(--muted);
+  font-size:.85rem;
+  margin:-4px auto 12px;
+}
+
+/* Slightly slower stage-specific animations */
+#daniell .battery-card.story-step-3 .daniell-flow span{
+  animation-duration:2.2s!important;
+}
+#daniell .battery-card.story-step-4 .moving-cu-ion,
+#daniell .battery-card.story-step-4 .cu-electrons,
+#daniell .battery-card.story-step-4 .cu-atom,
+#daniell .battery-card.story-step-4 .cu-caption,
+#daniell .battery-card.story-step-4 .cu-reaction-arrow,
+#daniell .battery-card.story-step-4 .deposit{
+  animation-duration:4.2s!important;
+}

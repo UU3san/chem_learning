@@ -45,30 +45,30 @@
       </div>
 
       <div class="grid two">
-        <article class="card lesson">
+        <article class="card lesson ion-loop-card">
           <h3>電子を失うと ＋イオン</h3>
-          <div class="ion-stage">
-            <div class="particle atom zinc" id="zincAtom">
-              <div class="core">Zn</div>
-              <div class="electron e-a">e⁻</div>
-              <div class="electron e-b">e⁻</div>
-            </div>
-            <div class="arrow">→</div>
-            <div class="ion-result-wrap hidden" id="zincIonWrap">
-              <div class="particle ion" id="zincIon">
-                <div class="core">Zn²⁺</div>
+          <div class="ion-stage ion-auto-stage" aria-label="亜鉛が電子を2個失って亜鉛イオンになる自動アニメーション">
+            <div class="ion-cycle">
+              <div class="particle atom zinc auto-zinc">
+                <div class="core">Zn</div>
+                <div class="electron e-a auto-e1">e⁻</div>
+                <div class="electron e-b auto-e2">e⁻</div>
               </div>
-              <div class="released-electrons" aria-label="放出された電子2個">
-                <span>e⁻</span><span>e⁻</span>
+
+              <div class="arrow auto-arrow">→</div>
+
+              <div class="ion-result-wrap auto-ion-result">
+                <div class="particle ion auto-zinc-ion">
+                  <div class="core">Zn²⁺</div>
+                </div>
+                <div class="released-electrons auto-released" aria-label="放出された電子2個">
+                  <span>e⁻</span><span>e⁻</span>
+                </div>
               </div>
             </div>
           </div>
           <div class="equation">Zn → Zn²⁺ + 2e⁻</div>
-          <div class="battery-controls ion-controls">
-            <button id="ionizeBtn" class="primary action" data-action="ionize">電子を2個出してみる</button>
-            <button id="ionResetBtn" class="ghost-btn action" data-action="reset-ion">↺ リセット</button>
-          </div>
-          <p class="explain">「電子を2個出してみる」を押すと、Zn²⁺と放出されたe⁻が2個表示されます。リセットで元のZnに戻ります。</p>
+          <p class="explain">Znからe⁻が2個出る → Zn²⁺になる → 元のZnへ戻る、を自動で繰り返します。</p>
         </article>
 
         <article class="card lesson">
@@ -158,17 +158,18 @@
 
       <article class="card battery-card">
         <div class="battery-controls">
-          <button class="primary action" data-action="run-daniell-story">▶ 順番に見る</button>
+          <button class="primary action" data-action="run-daniell-story">▶ 自動で順番に見る</button>
           <button class="ghost-btn action" data-action="reset-daniell-story">↺ リセット</button>
         </div>
-        <div class="story-progress" id="daniellStoryProgress">
-          <div class="story-step" data-story="1"><b>①</b><span>水溶液が電離</span></div>
-          <div class="story-step" data-story="2"><b>②</b><span>ZnがZn²⁺になる</span></div>
-          <div class="story-step" data-story="3"><b>③</b><span>電子が銅へ流れる</span></div>
-          <div class="story-step" data-story="4"><b>④</b><span>Cu²⁺がCuになる</span></div>
-          <div class="story-step" data-story="5"><b>⑤</b><span>青色が薄くなる</span></div>
+        <div class="story-progress" id="daniellStoryProgress" aria-label="ダニエル電池の反応を段階ごとに見る">
+          <button type="button" class="story-step" data-story="1"><b>①</b><span>水溶液が電離</span></button>
+          <button type="button" class="story-step" data-story="2"><b>②</b><span>ZnがZn²⁺になる</span></button>
+          <button type="button" class="story-step" data-story="3"><b>③</b><span>電子が銅へ流れる</span></button>
+          <button type="button" class="story-step" data-story="4"><b>④</b><span>Cu²⁺がCuになる</span></button>
+          <button type="button" class="story-step" data-story="5"><b>⑤</b><span>青色が薄くなる</span></button>
         </div>
-        <div class="story-message" id="daniellStoryMessage">「順番に見る」を押すと、反応を1つずつ追えます。</div>
+        <div class="story-help">自動再生のほか、①〜⑤を先生や生徒が直接押して、その段階だけ確認できます。</div>
+        <div class="story-message" id="daniellStoryMessage">「自動で順番に見る」を押すか、①〜⑤を直接押してください。</div>
         <div class="dissociation-panel daniell-dissociation" id="daniellDissociation">
           <div class="dissociation-title">2つの水溶液は、それぞれイオンに分かれている</div>
           <div class="dissociation-grid">
@@ -305,7 +306,7 @@
 </main>
 
   <footer>
-    <p>中学化学 学習Webアプリ Ver.4.1 ｜ GitHub Pages対応</p>
+    <p>中学化学 学習Webアプリ Ver.5 ｜ GitHub Pages対応</p>
   </footer>
 
   <script src="app.js"></script>
