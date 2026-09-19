@@ -139,7 +139,7 @@
         </div>
 
         <div class="grid three steps">
-          <div class="step"><b>①</b><span>亜鉛が電子を出す</span><code>Zn → Zn²⁺ + 2e⁻</code></div>
+          <div class="step"><b>①</b><span>亜鉛板のZn原子がZn²⁺となって水溶液へ出て、e⁻を2個残す</span><code>Zn → Zn²⁺ + 2e⁻</code></div>
           <div class="step"><b>②</b><span>電子が導線を通って銅へ</span><code>電子：亜鉛 → 銅</code></div>
           <div class="step"><b>③</b><span>H⁺が電子を受け取り、いったんH原子に。2個のHが結びついてH₂になる</span><code>2H⁺ + 2e⁻ → 2H → H₂</code></div>
         </div>
@@ -163,7 +163,7 @@
         </div>
         <div class="story-progress" id="daniellStoryProgress" aria-label="ダニエル電池の反応を段階ごとに見る">
           <button type="button" class="story-step" data-story="1"><b>①</b><span>水溶液が電離</span></button>
-          <button type="button" class="story-step" data-story="2"><b>②</b><span>ZnがZn²⁺になる</span></button>
+          <button type="button" class="story-step" data-story="2"><b>②</b><span>金属板のZnがZn²⁺に</span></button>
           <button type="button" class="story-step" data-story="3"><b>③</b><span>電子が銅へ流れる</span></button>
           <button type="button" class="story-step" data-story="4"><b>④</b><span>Cu²⁺がCuになる</span></button>
           <button type="button" class="story-step" data-story="5"><b>⑤</b><span>青色が薄くなる</span></button>
@@ -197,8 +197,21 @@
             <div class="electrode zinc-electrode story-zinc-electrode">
               <span class="sign minus">−</span><strong>Zn</strong><small>亜鉛</small>
             </div>
+
+            <div class="zn-reaction-lane" aria-label="亜鉛板のZn原子がZn2+になり電子を2個出すアニメーション">
+              <div class="zn-source-atom">Zn</div>
+              <div class="zn-to-ion-arrow">→</div>
+              <div class="zn-new-ion">Zn²⁺</div>
+              <div class="zn-released-electrons">
+                <span>e⁻</span><span>e⁻</span>
+              </div>
+              <div class="zn-reaction-label">Zn → Zn²⁺ + 2e⁻</div>
+            </div>
+
             <div class="solution-label">硫酸亜鉛水溶液</div>
-            <div class="ions zn-ions daniell-zn"><span>Zn²⁺</span><span>Zn²⁺</span></div>
+
+            <div class="preexisting-label">もともと水溶液中にあるZn²⁺</div>
+            <div class="ions zn-ions daniell-zn background-zn-ions"><span>Zn²⁺</span><span>Zn²⁺</span></div>
             <div class="ions daniell-sulfate left-sulfate"><span>SO₄²⁻</span><span>SO₄²⁻</span></div>
           </div>
           <div class="bridge cellophane"><span>セロファン<br><small>イオンは通れる</small></span></div>
@@ -222,7 +235,7 @@
         </div>
 
         <div class="grid three steps">
-          <div class="step"><b>①</b><span>亜鉛が電子を出す</span><code>Zn → Zn²⁺ + 2e⁻</code></div>
+          <div class="step"><b>①</b><span>亜鉛板のZn原子がZn²⁺となって水溶液へ出て、e⁻を2個残す</span><code>Zn → Zn²⁺ + 2e⁻</code></div>
           <div class="step"><b>②</b><span>電子が亜鉛から銅へ</span><code>電子：亜鉛 → 銅</code></div>
           <div class="step"><b>③</b><span>Cu²⁺が電子を受け取り銅に</span><code>Cu²⁺ + 2e⁻ → Cu</code></div>
         </div>
@@ -306,7 +319,7 @@
 </main>
 
   <footer>
-    <p>中学化学 学習Webアプリ Ver.5 ｜ GitHub Pages対応</p>
+    <p>中学化学 学習Webアプリ Ver.5.1 ｜ GitHub Pages対応</p>
   </footer>
 
   <script src="app.js"></script>

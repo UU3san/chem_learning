@@ -659,3 +659,161 @@ footer{text-align:center;color:var(--muted);padding:18px}
 #daniell .battery-card.story-step-4 .deposit{
   animation-duration:4.2s!important;
 }
+
+
+/* ===== Ver.5.1 : clearer Zn -> Zn2+ + 2e- animation ===== */
+#daniellZnHalf{overflow:hidden}
+
+.zn-reaction-lane{
+  position:absolute;
+  left:50%;
+  top:105px;
+  width:220px;
+  height:120px;
+  transform:translateX(-50%);
+  z-index:10;
+  pointer-events:none;
+}
+
+.zn-source-atom,
+.zn-new-ion{
+  position:absolute;
+  width:48px;height:48px;
+  border-radius:50%;
+  display:grid;place-items:center;
+  font-weight:900;
+  box-shadow:0 4px 12px rgba(30,80,120,.12);
+}
+.zn-source-atom{
+  left:88px;
+  top:10px;
+  background:#c8d0d7;
+  border:2px solid #78858f;
+  color:#26343e;
+}
+.zn-new-ion{
+  left:45px;
+  top:62px;
+  background:#e8edf0;
+  border:2px solid #8698a6;
+  color:#334e5f;
+  opacity:0;
+}
+.zn-to-ion-arrow{
+  position:absolute;
+  left:82px;
+  top:54px;
+  font-weight:900;
+  color:#456a80;
+  opacity:0;
+  transform:rotate(135deg);
+}
+.zn-released-electrons{
+  position:absolute;
+  left:128px;
+  top:34px;
+  display:flex;
+  gap:5px;
+  opacity:0;
+}
+.zn-released-electrons span{
+  width:30px;height:30px;
+  border-radius:50%;
+  display:grid;place-items:center;
+  background:#1777cc;
+  color:#fff;
+  font-size:.66rem;
+  font-weight:900;
+}
+.zn-reaction-label{
+  position:absolute;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  background:rgba(255,255,255,.9);
+  border:1px solid #cfdce5;
+  border-radius:8px;
+  padding:3px 7px;
+  font-size:.72rem;
+  font-weight:900;
+  opacity:0;
+}
+
+.preexisting-label{
+  position:absolute;
+  left:8px;
+  bottom:142px;
+  width:105px;
+  padding:4px 6px;
+  border-radius:8px;
+  background:rgba(255,255,255,.78);
+  font-size:.58rem;
+  line-height:1.25;
+  color:#657986;
+  z-index:3;
+}
+.background-zn-ions{
+  opacity:.45;
+}
+
+/* Step 2:
+   Zn atom leaves metal plate -> becomes Zn2+ in solution,
+   while two electrons move upward/right toward the wire.
+*/
+#daniell .battery-card.story-step-2 .zn-source-atom{
+  animation:znAtomLeavesPlate 4.8s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-2 .zn-new-ion{
+  animation:znIonAppearsInSolution 4.8s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-2 .zn-to-ion-arrow{
+  animation:znArrowShow 4.8s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-2 .zn-released-electrons{
+  animation:znElectronsLeave 4.8s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-2 .zn-reaction-label{
+  animation:znReactionLabel 4.8s ease-in-out infinite!important;
+}
+
+/* prevent the old background Zn ions from looking like the new reaction */
+#daniell .battery-card.story-step-2 .daniell-zn span{
+  animation:none!important;
+}
+
+@keyframes znAtomLeavesPlate{
+  0%,12%{opacity:1;transform:translate(0,0) scale(1)}
+  30%{opacity:1;transform:translate(-8px,18px) scale(.96)}
+  44%,100%{opacity:0;transform:translate(-36px,48px) scale(.8)}
+}
+@keyframes znIonAppearsInSolution{
+  0%,34%{opacity:0;transform:translate(18px,-18px) scale(.75)}
+  48%,78%{opacity:1;transform:translate(0,0) scale(1)}
+  100%{opacity:.2;transform:translate(-14px,24px) scale(.92)}
+}
+@keyframes znArrowShow{
+  0%,24%{opacity:0}
+  34%,58%{opacity:1}
+  72%,100%{opacity:0}
+}
+@keyframes znElectronsLeave{
+  0%,26%{opacity:0;transform:translate(0,0)}
+  36%,56%{opacity:1;transform:translate(0,-4px)}
+  78%,100%{opacity:0;transform:translate(62px,-78px)}
+}
+@keyframes znReactionLabel{
+  0%,26%{opacity:0}
+  38%,78%{opacity:1}
+  100%{opacity:0}
+}
+
+@media(max-width:760px){
+  .zn-reaction-lane{width:160px;top:105px}
+  .zn-source-atom{left:64px}
+  .zn-new-ion{left:26px}
+  .zn-released-electrons{left:92px}
+  .zn-to-ion-arrow{left:60px}
+  .zn-reaction-label{font-size:.58rem}
+  .preexisting-label{width:82px;font-size:.5rem;bottom:135px}
+}
