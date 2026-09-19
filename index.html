@@ -54,13 +54,18 @@
               <div class="electron e-b">e⁻</div>
             </div>
             <div class="arrow">→</div>
-            <div class="particle ion hidden" id="zincIon">
-              <div class="core">Zn²⁺</div>
+            <div class="ion-result-wrap hidden" id="zincIonWrap">
+              <div class="particle ion" id="zincIon">
+                <div class="core">Zn²⁺</div>
+              </div>
+              <div class="released-electrons" aria-label="放出された電子2個">
+                <span>e⁻</span><span>e⁻</span>
+              </div>
             </div>
           </div>
           <div class="equation">Zn → Zn²⁺ + 2e⁻</div>
-          <button class="primary action" data-action="ionize">電子を2個出してみる</button>
-          <p class="explain">亜鉛原子が電子を2個失うと、亜鉛イオンになります。</p>
+          <button id="ionizeBtn" class="primary action" data-action="ionize">電子を2個出してみる</button>
+          <p class="explain">亜鉛原子が電子を2個失うと、亜鉛イオンになります。数秒後に元のZnへ戻ります。</p>
         </article>
 
         <article class="card lesson">
@@ -92,6 +97,17 @@
           <button class="primary action" data-action="run-volta">▶ 動かして見る</button>
           <button class="ghost-btn action" data-action="reset-volta">↺ リセット</button>
         </div>
+        <div class="dissociation-panel volta-dissociation">
+          <div class="dissociation-title">まず、水溶液の中では？</div>
+          <div class="molecule-row">
+            <span class="formula-chip acid">H₂SO₄</span>
+            <span class="diss-arrow">→ 水中で電離 →</span>
+            <span class="ion-chip hchip">H⁺</span>
+            <span class="ion-chip hchip">H⁺</span>
+            <span class="ion-chip sulfate">SO₄²⁻</span>
+          </div>
+          <p>うすい硫酸では、H₂SO₄が電離して <strong>H⁺ と SO₄²⁻</strong> が水溶液中に存在します。</p>
+        </div>
         <div class="battery-wrap">
           <div class="wire">
             <div class="electron-flow volta-flow" aria-hidden="true">
@@ -112,14 +128,17 @@
               <div class="bubbles volta-bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
             </div>
             <div class="ions zn-ions" aria-hidden="true"><span>Zn²⁺</span><span>Zn²⁺</span></div>
-            <div class="ions h-ions" aria-hidden="true"><span>H⁺</span><span>H⁺</span></div>
+            <div class="ions h-ions" aria-hidden="true"><span>H⁺</span><span>H⁺</span><span>H⁺</span></div>
+            <div class="ions sulfate-ions" aria-hidden="true"><span>SO₄²⁻</span><span>SO₄²⁻</span></div>
+            <div class="hydrogen-atoms" aria-hidden="true"><span>H</span><span>H</span></div>
+            <div class="hydrogen-molecule" aria-hidden="true">H₂ ↑</div>
           </div>
         </div>
 
         <div class="grid three steps">
           <div class="step"><b>①</b><span>亜鉛が電子を出す</span><code>Zn → Zn²⁺ + 2e⁻</code></div>
           <div class="step"><b>②</b><span>電子が導線を通って銅へ</span><code>電子：亜鉛 → 銅</code></div>
-          <div class="step"><b>③</b><span>H⁺が電子を受け取り水素に</span><code>2H⁺ + 2e⁻ → H₂</code></div>
+          <div class="step"><b>③</b><span>H⁺が電子を受け取り、いったんH原子に。2個のHが結びついてH₂になる</span><code>2H⁺ + 2e⁻ → 2H → H₂</code></div>
         </div>
         <div class="warning"><strong>弱点：</strong>銅板に水素の気泡がつくと電流が弱くなりやすくなります。これを<strong>分極</strong>といいます。</div>
       </article>
@@ -139,6 +158,23 @@
           <button class="primary action" data-action="run-daniell">▶ 動かして見る</button>
           <button class="ghost-btn action" data-action="reset-daniell">↺ リセット</button>
         </div>
+        <div class="dissociation-panel daniell-dissociation">
+          <div class="dissociation-title">2つの水溶液は、それぞれイオンに分かれている</div>
+          <div class="dissociation-grid">
+            <div>
+              <span class="formula-chip zincsol">ZnSO₄</span>
+              <span class="diss-arrow">→</span>
+              <span class="ion-chip znchip">Zn²⁺</span>
+              <span class="ion-chip sulfate">SO₄²⁻</span>
+            </div>
+            <div>
+              <span class="formula-chip coppersol">CuSO₄</span>
+              <span class="diss-arrow">→</span>
+              <span class="ion-chip cuchip">Cu²⁺</span>
+              <span class="ion-chip sulfate">SO₄²⁻</span>
+            </div>
+          </div>
+        </div>
 
         <div class="daniell-scene">
           <div class="wire daniell-wire">
@@ -151,15 +187,18 @@
             </div>
             <div class="solution-label">硫酸亜鉛水溶液</div>
             <div class="ions zn-ions daniell-zn"><span>Zn²⁺</span><span>Zn²⁺</span></div>
+            <div class="ions daniell-sulfate left-sulfate"><span>SO₄²⁻</span><span>SO₄²⁻</span></div>
           </div>
-          <div class="bridge"><span>仕切り<br><small>イオンが移動</small></span></div>
+          <div class="bridge cellophane"><span>セロファン<br><small>イオンは通れる</small></span></div>
           <div class="half-cell copper-half">
             <div class="electrode copper-electrode">
               <span class="sign plus">＋</span><strong>Cu</strong><small>銅</small>
               <div class="deposit" aria-hidden="true"></div>
             </div>
             <div class="solution-label">硫酸銅水溶液</div>
-            <div class="ions cu-ions"><span>Cu²⁺</span><span>Cu²⁺</span><span>Cu²⁺</span></div>
+            <div class="ions cu-ions"><span>Cu²⁺</span><span>Cu²⁺</span><span>Cu²⁺</span><span>Cu²⁺</span></div>
+            <div class="ions daniell-sulfate right-sulfate"><span>SO₄²⁻</span><span>SO₄²⁻</span></div>
+            <div class="blue-meter"><span>Cu²⁺が減る</span><div class="meter-bar"><i></i></div><small>青色がだんだん薄くなる</small></div>
           </div>
         </div>
 
@@ -168,7 +207,7 @@
           <div class="step"><b>②</b><span>電子が亜鉛から銅へ</span><code>電子：亜鉛 → 銅</code></div>
           <div class="step"><b>③</b><span>Cu²⁺が電子を受け取り銅に</span><code>Cu²⁺ + 2e⁻ → Cu</code></div>
         </div>
-        <div class="tip"><strong>ポイント：</strong>ボルタ電池のように銅板で水素がたまりにくいため、電流がより安定して流れます。</div>
+        <div class="tip"><strong>ポイント：</strong>Cu²⁺が電子を受け取ってCu原子になり銅板に付着します。Cu²⁺が減るため、硫酸銅水溶液の青色も少しずつ薄くなります。</div>
       </article>
     </section>
 
@@ -248,7 +287,7 @@
 </main>
 
   <footer>
-    <p>中学化学 学習Webアプリ Ver.1 ｜ GitHub Pages対応</p>
+    <p>中学化学 学習Webアプリ Ver.2 ｜ GitHub Pages対応</p>
   </footer>
 
   <script src="app.js"></script>

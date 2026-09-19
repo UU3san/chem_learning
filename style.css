@@ -104,3 +104,99 @@ footer{text-align:center;color:var(--muted);padding:18px}
 }
 
 .print-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.print-grid figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px}.print-grid img{width:100%;height:auto;border-radius:10px;display:block}.print-grid figcaption{text-align:center;color:var(--muted);font-size:.85rem;margin-top:6px}@media(max-width:760px){.print-grid{grid-template-columns:1fr}}
+
+
+/* ===== Ver.2 additions ===== */
+.ion-result-wrap{display:flex;align-items:center;gap:14px}
+.released-electrons{display:flex;gap:8px}
+.released-electrons span{
+  width:44px;height:44px;border-radius:50%;background:#1c7ed6;color:#fff;
+  display:grid;place-items:center;font-weight:900;box-shadow:0 4px 12px rgba(28,126,214,.25)
+}
+.action:disabled{opacity:.55;cursor:not-allowed}
+
+.dissociation-panel{
+  max-width:900px;margin:0 auto 18px;padding:14px 16px;border-radius:16px;
+  border:1px solid #cfe2f2;background:#f7fbff;text-align:center
+}
+.dissociation-title{font-weight:900;margin-bottom:8px;color:#164b78}
+.molecule-row,.dissociation-grid>div{
+  display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap
+}
+.dissociation-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.formula-chip,.ion-chip{
+  display:inline-grid;place-items:center;min-width:72px;padding:8px 12px;border-radius:999px;
+  font-weight:900;border:2px solid transparent
+}
+.formula-chip.acid{background:#fff2d9;border-color:#efb34b}
+.formula-chip.zincsol{background:#eef3f6;border-color:#98a9b5}
+.formula-chip.coppersol{background:#dff1ff;border-color:#4f9bd5}
+.ion-chip.hchip{background:#ffe3ec;border-color:#e67ea2}
+.ion-chip.sulfate{background:#f3f4f6;border-color:#a8afb7}
+.ion-chip.znchip{background:#e8edf0;border-color:#8698a6}
+.ion-chip.cuchip{background:#d9edff;border-color:#4397d2}
+.diss-arrow{font-weight:900;color:#60758b}
+
+.sulfate-ions{left:50%;bottom:35px;transform:translateX(-50%)}
+.sulfate-ions span,.daniell-sulfate span{
+  background:#f0f1f4;border-color:#9da5ad;font-size:.72rem
+}
+
+.hydrogen-atoms{
+  position:absolute;right:125px;bottom:120px;display:flex;gap:10px;opacity:0
+}
+.hydrogen-atoms span{
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:#fff;border:2px solid #71bde2;font-weight:900
+}
+.hydrogen-molecule{
+  position:absolute;right:105px;top:28px;font-weight:900;color:#17608f;opacity:0;font-size:1.1rem
+}
+.running .hydrogen-atoms{animation:hAtoms 2.2s ease-in-out infinite}
+.running .hydrogen-molecule{animation:h2Fly 2.2s ease-in-out infinite}
+@keyframes hAtoms{
+  0%,25%{opacity:0;transform:translateY(20px)}
+  35%,60%{opacity:1;transform:translateY(0)}
+  70%,100%{opacity:0;transform:translate(18px,-35px) scale(.75)}
+}
+@keyframes h2Fly{
+  0%,58%{opacity:0;transform:translateY(55px) scale(.8)}
+  68%{opacity:1}
+  100%{opacity:0;transform:translateY(-25px) scale(1.08)}
+}
+
+.cellophane{
+  border:10px solid rgba(160,190,210,.48)!important;
+  border-bottom:0!important;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.65) 0 5px,rgba(180,210,228,.3) 5px 10px);
+  box-shadow:inset 0 0 0 2px rgba(105,150,180,.25)
+}
+.cellophane span{color:#315d78}
+.daniell-sulfate{bottom:28px}
+.left-sulfate{right:4px}.right-sulfate{left:4px}
+
+.copper-half{
+  transition:background-color 2.2s ease, filter 2.2s ease;
+  background:linear-gradient(to top,rgba(40,145,220,.42) 0 70%,transparent 70%)
+}
+.running .copper-half{
+  background:linear-gradient(to top,rgba(120,190,230,.16) 0 70%,transparent 70%)
+}
+.blue-meter{
+  position:absolute;right:8px;top:18px;width:120px;padding:7px;border-radius:10px;
+  background:rgba(255,255,255,.85);font-size:.68rem;font-weight:800;text-align:center
+}
+.meter-bar{height:10px;background:#dceeff;border-radius:999px;overflow:hidden;margin:4px 0}
+.meter-bar i{display:block;height:100%;width:100%;background:#2e8fd1;transition:width 2.2s ease,opacity 2.2s ease}
+.running .meter-bar i{width:28%;opacity:.4}
+.running .cu-ions span:nth-child(1){animation-delay:0s}
+.running .cu-ions span:nth-child(2){animation-delay:.4s}
+.running .cu-ions span:nth-child(3){animation-delay:.8s}
+.running .cu-ions span:nth-child(4){animation-delay:1.2s}
+
+@media(max-width:760px){
+  .dissociation-grid{grid-template-columns:1fr}
+  .hydrogen-atoms{right:72px}
+  .hydrogen-molecule{right:56px}
+  .blue-meter{width:95px;font-size:.6rem;top:8px}
+}
