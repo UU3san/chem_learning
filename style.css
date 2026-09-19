@@ -2705,3 +2705,273 @@ footer{text-align:center;color:var(--muted);padding:18px}
   .cu-live-atom{left:62px;width:36px;height:36px;font-size:.64rem}
   .cu-live-arrow{left:101px}
 }
+
+
+/* =========================================================
+   Ver.5.9
+   ========================================================= */
+
+/* ================= VOLTA: copper-side hydrogen formation ================= */
+.volta-copper-electrode{
+  overflow:visible!important;
+}
+
+.volta-hydrogen-live{
+  position:absolute;
+  left:-175px;   /* solution is to the LEFT of the Cu plate */
+  top:54px;
+  width:180px;
+  height:150px;
+  z-index:80;
+  pointer-events:none;
+  overflow:visible;
+}
+
+/* Two H+ ions in solution */
+.vh-hplus,
+.vh-hatom,
+.vh-h2{
+  position:absolute;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  box-shadow:0 3px 9px rgba(40,70,90,.18);
+}
+.vh-hplus{
+  background:#ffe4ee;
+  border:2px solid #e787aa;
+  color:#9b345c;
+  opacity:0;
+}
+.vh-hplus-a{left:12px;top:30px}
+.vh-hplus-b{left:12px;top:82px}
+
+/* e- start INSIDE / at the surface of the copper plate on the right,
+   then move horizontally LEFT to the two H+ ions. */
+.vh-electrons{
+  position:absolute;
+  left:145px;
+  top:51px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  opacity:0;
+}
+.vh-electrons i{
+  width:27px;height:27px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#1777cc;color:white;
+  font-style:normal;font-size:.55rem;font-weight:900;
+}
+
+/* H atoms appear after H+ receives electrons. */
+.vh-hatom{
+  background:#fff;
+  border:2px solid #69b6dd;
+  color:#17608f;
+  opacity:0;
+}
+.vh-hatom-a{left:72px;top:34px}
+.vh-hatom-b{left:72px;top:84px}
+
+.vh-join{
+  position:absolute;
+  left:115px;
+  top:62px;
+  font-weight:900;
+  color:#4f6d80;
+  opacity:0;
+}
+
+/* H2 forms near the Cu plate then rises as gas */
+.vh-h2{
+  left:122px;
+  top:61px;
+  background:#e7f7ff;
+  border:2px solid #5db7df;
+  color:#145e86;
+  opacity:0;
+}
+.vh-gas-label{
+  position:absolute;
+  left:104px;
+  top:10px;
+  width:82px;
+  padding:4px 5px;
+  border-radius:8px;
+  background:rgba(255,255,255,.94);
+  border:1px solid #acd9ec;
+  color:#17608f;
+  font-size:.54rem;
+  font-weight:900;
+  text-align:center;
+  line-height:1.2;
+  opacity:0;
+}
+
+/* Sequence:
+   H+ visible -> e- from Cu plate -> H atoms -> H2 molecule -> H2 rises */
+#volta .battery-card.running .vh-hplus-a{
+  animation:v59HplusA 8s ease-in-out infinite!important;
+}
+#volta .battery-card.running .vh-hplus-b{
+  animation:v59HplusB 8s ease-in-out infinite!important;
+}
+#volta .battery-card.running .vh-electrons{
+  animation:v59ElectronsFromCu 8s ease-in-out infinite!important;
+}
+#volta .battery-card.running .vh-hatom-a{
+  animation:v59HatomA 8s ease-in-out infinite!important;
+}
+#volta .battery-card.running .vh-hatom-b{
+  animation:v59HatomB 8s ease-in-out infinite!important;
+}
+#volta .battery-card.running .vh-join{
+  animation:v59Join 8s ease-in-out infinite!important;
+}
+#volta .battery-card.running .vh-h2{
+  animation:v59H2Gas 8s ease-in-out infinite!important;
+}
+#volta .battery-card.running .vh-gas-label{
+  animation:v59GasLabel 8s ease-in-out infinite!important;
+}
+
+/* Keep old simple bubble effect quieter because the new sequence is primary. */
+#volta .battery-card.running .volta-bubbles{
+  opacity:.3!important;
+}
+
+@keyframes v59HplusA{
+  0%,18%{opacity:1;transform:translateX(0)}
+  32%,40%{opacity:1;transform:translateX(48px)}
+  48%,100%{opacity:0;transform:translateX(56px) scale(.8)}
+}
+@keyframes v59HplusB{
+  0%,18%{opacity:1;transform:translateX(0)}
+  32%,40%{opacity:1;transform:translateX(48px)}
+  48%,100%{opacity:0;transform:translateX(56px) scale(.8)}
+}
+@keyframes v59ElectronsFromCu{
+  0%,16%{opacity:0;transform:translateX(0)}
+  24%{opacity:1;transform:translateX(0)}
+  38%,42%{opacity:1;transform:translateX(-72px)}
+  50%,100%{opacity:0;transform:translateX(-78px)}
+}
+@keyframes v59HatomA{
+  0%,42%{opacity:0;transform:scale(.7)}
+  50%,61%{opacity:1;transform:scale(1)}
+  70%,100%{opacity:0;transform:translate(33px,24px) scale(.8)}
+}
+@keyframes v59HatomB{
+  0%,42%{opacity:0;transform:scale(.7)}
+  50%,61%{opacity:1;transform:scale(1)}
+  70%,100%{opacity:0;transform:translate(33px,-24px) scale(.8)}
+}
+@keyframes v59Join{
+  0%,53%{opacity:0}
+  60%,70%{opacity:1}
+  78%,100%{opacity:0}
+}
+@keyframes v59H2Gas{
+  0%,66%{opacity:0;transform:translate(0,0) scale(.72)}
+  73%{opacity:1;transform:translate(0,0) scale(1)}
+  88%{opacity:1;transform:translate(0,-72px) scale(1.05)}
+  100%{opacity:0;transform:translate(0,-100px) scale(1.08)}
+}
+@keyframes v59GasLabel{
+  0%,72%{opacity:0}
+  80%,92%{opacity:1}
+  100%{opacity:0}
+}
+
+/* suppress the old free-floating hydrogen animations, if inherited */
+.hydrogen-atoms,.hydrogen-molecule{display:none!important;}
+
+
+/* ================= DANIELL: make blue fading unmistakable ================= */
+
+/* Start substantially darker than Ver.5.8, then fade to very pale. */
+.cuso4-liquid-layer{
+  background:rgb(35,132,205)!important;
+  opacity:.78!important;
+  transition:none!important;
+}
+
+/* 18 seconds, many intermediate points so the change looks continuous. */
+#daniell .battery-card.story-step-5 .cuso4-liquid-layer{
+  animation:v59CuSO4Fade 18s linear forwards!important;
+}
+@keyframes v59CuSO4Fade{
+   0%{opacity:.78}
+   5%{opacity:.75}
+  10%{opacity:.72}
+  15%{opacity:.69}
+  20%{opacity:.66}
+  25%{opacity:.63}
+  30%{opacity:.60}
+  35%{opacity:.57}
+  40%{opacity:.54}
+  45%{opacity:.51}
+  50%{opacity:.48}
+  55%{opacity:.45}
+  60%{opacity:.42}
+  65%{opacity:.39}
+  70%{opacity:.36}
+  75%{opacity:.33}
+  80%{opacity:.29}
+  85%{opacity:.25}
+  90%{opacity:.21}
+  95%{opacity:.17}
+ 100%{opacity:.12}
+}
+
+/* Make Cu2+ disappearance easy to see at the same time. */
+#daniell .battery-card.story-step-5 .cu-background-ions span:nth-child(1){
+  animation:v59CuIonFade 18s linear forwards!important;
+}
+#daniell .battery-card.story-step-5 .cu-background-ions span:nth-child(2){
+  animation:v59CuIonFade 18s 2s linear forwards!important;
+}
+#daniell .battery-card.story-step-5 .cu-background-ions span:nth-child(3){
+  animation:v59CuIonFade 18s 4s linear forwards!important;
+}
+@keyframes v59CuIonFade{
+  0%{opacity:1}
+  25%{opacity:.82}
+  50%{opacity:.58}
+  75%{opacity:.30}
+  100%{opacity:.05}
+}
+
+/* Show a small fixed comparison swatch only as a legend, not as the animation itself. */
+#blueMeter.solution-fade-note{
+  width:132px!important;
+  background:rgba(255,255,255,.93)!important;
+}
+#blueMeter.solution-fade-note::after{
+  content:"濃い青 → 薄い青";
+  display:block;
+  margin-top:4px;
+  padding:3px 5px;
+  border-radius:6px;
+  background:linear-gradient(90deg,rgba(35,132,205,.78),rgba(165,215,240,.12));
+  color:#17324d;
+  font-size:.52rem;
+}
+
+@media(max-width:760px){
+  .volta-hydrogen-live{
+    left:-132px;
+    width:137px;
+    top:48px;
+  }
+  .vh-hplus-a,.vh-hplus-b{left:2px}
+  .vh-hatom-a,.vh-hatom-b{left:50px}
+  .vh-electrons{left:104px}
+  .vh-join{left:88px}
+  .vh-h2{left:96px}
+  .vh-gas-label{left:72px;width:70px}
+}

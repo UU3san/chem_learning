@@ -12,7 +12,7 @@
     <div class="brand">
       <div class="brand-icon" aria-hidden="true">⚡</div>
       <div>
-        <h1>電池とイオンを動かして学ぼう <span class="version-badge">Ver.5.8</span></h1>
+        <h1>電池とイオンを動かして学ぼう <span class="version-badge">Ver.5.9</span></h1>
         <p>中学生向け｜イオン → ボルタ電池 → ダニエル電池 → 比較 → 確認テスト</p>
       </div>
     </div>
@@ -141,24 +141,38 @@
               </div>
             </div>
 
-            <div class="electrode copper-electrode">
+            <div class="electrode copper-electrode volta-copper-electrode">
               <span class="sign plus">＋</span>
               <strong>Cu</strong><small>銅</small>
+
+              <div class="volta-hydrogen-live" aria-hidden="true">
+                <div class="vh-hplus vh-hplus-a">H⁺</div>
+                <div class="vh-hplus vh-hplus-b">H⁺</div>
+
+                <div class="vh-electrons"><i>e⁻</i><i>e⁻</i></div>
+
+                <div class="vh-hatom vh-hatom-a">H</div>
+                <div class="vh-hatom vh-hatom-b">H</div>
+
+                <div class="vh-join">＋</div>
+                <div class="vh-h2">H₂</div>
+                <div class="vh-gas-label">水素分子<br>→ 気体になる</div>
+              </div>
+
               <div class="bubbles volta-bubbles" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
             </div>
 
             <div class="ions zn-ions" aria-hidden="true"><span>Zn²⁺</span><span>Zn²⁺</span></div>
             <div class="ions h-ions" aria-hidden="true"><span>H⁺</span><span>H⁺</span><span>H⁺</span></div>
             <div class="ions sulfate-ions solution-sulfate" aria-hidden="true"><span>SO₄²⁻</span><span>SO₄²⁻</span></div>
-            <div class="hydrogen-atoms" aria-hidden="true"><span>H</span><span>H</span></div>
-            <div class="hydrogen-molecule" aria-hidden="true">H₂ ↑</div>
+            
           </div>
         </div>
 
         <div class="grid three steps">
           <div class="step"><b>①</b><span>亜鉛板のZn原子がZn²⁺となって水溶液へ出て、e⁻を2個残す</span><code>Zn → Zn²⁺ + 2e⁻</code></div>
           <div class="step"><b>②</b><span>電子が導線を通って銅へ</span><code>電子：亜鉛 → 銅</code></div>
-          <div class="step"><b>③</b><span>H⁺が電子を受け取り、いったんH原子に。2個のHが結びついてH₂になる</span><code>2H⁺ + 2e⁻ → 2H → H₂</code></div>
+          <div class="step"><b>③</b><span>銅板から来たe⁻をH⁺が受け取ってH原子になり、H原子2個が結びついてH₂となり気体になる</span><code>2H⁺ + 2e⁻ → 2H → H₂↑</code></div>
         </div>
         <div class="warning"><strong>弱点：</strong>銅板に水素の気泡がつくと電流が弱くなりやすくなります。これを<strong>分極</strong>といいます。</div>
       </article>
@@ -347,7 +361,7 @@
 </main>
 
   <footer>
-    <p>中学化学 学習Webアプリ Ver.5.8 ｜ GitHub Pages対応</p>
+    <p>中学化学 学習Webアプリ Ver.5.9 ｜ GitHub Pages対応</p>
   </footer>
 
   <script src="app.js"></script>
