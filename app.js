@@ -28,20 +28,128 @@ function setRunning(selector,on=true){
   const el=document.querySelector(selector);
   if(el) el.classList.toggle('running',on);
 }
+
+let daniellStoryTimers = [];
+
+function resetIonDemo(){
+  const atom=document.getElementById('zincAtom');
+  const wrap=document.getElementById('zincIonWrap');
+  const btn=document.getElementById('ionizeBtn');
+  if(!atom || !wrap) return;
+  atom.classList.remove('hidden','ionizing');
+  wrap.classList.add('hidden');
+  if(btn) btn.disabled=false;
+}
+
+function clearDaniellStoryTimers(){
+  daniellStoryTimers.forEach(t=>clearTimeout(t));
+  daniellStoryTimers=[];
+}
+
+function setDaniellStoryStep(step, message){
+  const card=document.querySelector('#daniell .battery-card');
+  const allTargets=[
+    document.getElementById('daniellDissociation'),
+    document.getElementById('daniellZnHalf'),
+    document.getElementById('daniellWire'),
+    document.getElementById('cuReactionLane'),
+    document.getElementById('daniellCuHalf')
+  ].filter(Boolean);
+
+  card.classList.add('story-mode');
+  for(let i=1;i<=5;i++) card.classList.remove(`story-step-${i}`);
+  card.classList.add(`story-step-${step}`);
+
+  document.querySelectorAll('#daniellStoryProgress .story-step').forEach((el,i)=>{
+    el.classList.toggle('active', i===step-1);
+    el.classList.toggle('done', i<step-1);
+  });
+
+  allTargets.forEach(el=>el.classList.add('story-dim'));
+  const targetMap={
+    1:[document.getElementById('daniellDissociation')],
+    2:[document.getElementById('daniellZnHalf')],
+    3:[document.getElementById('daniellWire')],
+    4:[document.getElementById('cuReactionLane'),document.getElementById('daniellCuHalf')],
+    5:[document.getElementById('daniellCuHalf'),document.getElementById('blueMeter')]
+  };
+  (targetMap[step]||[]).filter(Boolean).forEach(el=>{
+    el.classList.remove('story-dim');
+    el.classList.add('story-highlight','story-pulse');
+    setTimeout(()=>el.classList.remove('story-pulse'),900);
+  });
+
+  const msg=document.getElementById('daniellStoryMessage');
+  if(msg) msg.textContent=message;
+}
+
+function resetDaniellStory(){
+  clearDaniellStoryTimers();
+  const card=document.querySelector('#daniell .battery-card');
+  if(card){
+    card.classList.remove('story-mode','running');
+    for(let i=1;i<=5;i++) card.classList.remove(`story-step-${i}`);
+  }
+  document.querySelectorAll('#daniellStoryProgress .story-step').forEach(el=>{
+    el.classList.remove('active','done');
+  });
+  document.querySelectorAll('#daniell .story-dim,#daniell .story-highlight').forEach(el=>{
+    el.classList.remove('story-dim','story-highlight');
+  });
+  const msg=document.getElementById('daniellStoryMessage');
+  if(msg) msg.textContent='「順番に見る」を押すと、反応を1つずつ追えます。';
+}
+
+function runDaniellStory(){
+  resetDaniellStory();
+  const stages=[
+    [0,1,'① まず、ZnSO₄とCuSO₄は水の中でイオンに分かれています。'],
+    [2500,2,'② 亜鉛Znが電子を2個出して、Zn²⁺として水溶液中へ入ります。'],
+    [5200,3,'③ 出た電子e⁻は、導線を通って亜鉛板から銅板へ流れます。'],
+    [8000,4,'④ Cu²⁺が銅板へ近づき、e⁻を2個受け取ってCu原子になり、銅板に付着します。'],
+    [11500,5,'⑤ Cu²⁺が減っていくので、硫酸銅水溶液の青色がだんだん薄くなります。']
+  ];
+  stages.forEach(([delay,step,msg])=>{
+    daniellStoryTimers.push(setTimeout(()=>{
+      setDaniellStoryStep(step,msg);
+      speak(msg);
+    },delay));
+  });
+}
+
 document.querySelectorAll('.action').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const a=btn.dataset.action;
+    if(a==='ionize'){
+      const atom=document.getElementById('zincAtom');
+      const wrap=document.getElementById('zincIonWrap');
+      const ionBtn=document.getElementById('ionizeBtn');
+      if(!atom || !wrap) return;
+      ionBtn.disabled=true;
+      atom.classList.remove('ionizing');
+      wrap.classList.add('hidden');
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+        atom.classList.add('ionizing');
+        setTimeout(()=>{
+          atom.classList.add('hidden');
+          wrap.classList.remove('hidden');
+          ionBtn.disabled=false;
+        },650);
+      }));
+      speak('亜鉛原子が電子を2個失うと、亜鉛イオンZn2プラスになります。右のeマイナス2個が、亜鉛から出た電子です。');
+    }
+    if(a==='reset-ion'){
+      resetIonDemo();
+      speechSynthesis.cancel();
+    }
     
     if(a==='run-volta'){
       setRunning('#volta .battery-card',true);
       speak('まず、硫酸は水中で電離して水素イオンと硫酸イオンになります。亜鉛が電子を出し、電子は導線を通って銅へ進みます。水素イオンは電子を受け取り、いったん水素原子になり、2個が結びついて水素分子H2として気体になります。');
     }
     if(a==='reset-volta'){ setRunning('#volta .battery-card',false); speechSynthesis.cancel(); }
-    if(a==='run-daniell'){
-      setRunning('#daniell .battery-card',true);
-      speak('ダニエル電池では、硫酸亜鉛水溶液と硫酸銅水溶液がそれぞれイオンに分かれています。亜鉛が電子を出し、電子は導線を通って銅板へ移動します。銅イオン Cu2プラスは銅板へ近づき、電子を2個受け取ってCu原子になります。そのCu原子が銅板に付着します。水溶液中の銅イオンが減るため、青色も少しずつ薄くなります。');
-    }
-    if(a==='reset-daniell'){ setRunning('#daniell .battery-card',false); speechSynthesis.cancel(); }
+    if(a==='run-daniell-story'){ runDaniellStory(); }
+    if(a==='reset-daniell-story'){ resetDaniellStory(); speechSynthesis.cancel(); }
   });
 });
 

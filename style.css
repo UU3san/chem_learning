@@ -397,3 +397,176 @@ footer{text-align:center;color:var(--muted);padding:18px}
   .cu-reaction-arrow{font-size:.56rem}
   .cu-caption{font-size:.55rem}
 }
+
+
+/* ===== Ver.4 ===== */
+.ion-controls{margin-top:8px}
+.ion-controls .ghost-btn{min-width:120px}
+
+/* disable old auto-loop animations from Ver.3 on the ion card */
+.auto-zinc,.auto-arrow,.auto-ion-result,
+.auto-zinc .auto-e1,.auto-zinc .auto-e2,.auto-released span{
+  animation:none!important;
+}
+
+.story-progress{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  max-width:960px;
+  margin:0 auto 12px;
+}
+.story-step{
+  padding:10px 8px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#f8fbfd;
+  text-align:center;
+  color:var(--muted);
+  transition:.35s ease;
+}
+.story-step b{display:block;font-size:1.15rem;color:#8aa0b4}
+.story-step span{font-size:.78rem;font-weight:800}
+.story-step.active{
+  background:#eaf4ff;
+  border-color:#5b9ed4;
+  color:#164b78;
+  transform:translateY(-2px);
+  box-shadow:0 5px 14px rgba(56,120,170,.12)
+}
+.story-step.done{
+  background:#eefaf3;
+  border-color:#64b98b;
+  color:#236c45
+}
+.story-message{
+  max-width:900px;
+  margin:0 auto 16px;
+  padding:10px 14px;
+  border-radius:12px;
+  background:#fff8e7;
+  border:1px solid #f1d59a;
+  font-weight:800;
+  text-align:center;
+  min-height:48px;
+}
+.story-dim{opacity:.28!important;filter:saturate(.55)}
+.story-highlight{
+  opacity:1!important;
+  filter:none!important;
+  box-shadow:0 0 0 4px rgba(255,194,62,.28),0 8px 20px rgba(40,90,130,.12)!important
+}
+.story-pulse{animation:storyPulse .8s ease-in-out 2}
+@keyframes storyPulse{50%{transform:scale(1.04)}}
+
+/* staged Daniell reactions */
+#daniellDissociation,
+#daniellZnHalf,
+#daniellWire,
+#cuReactionLane,
+#daniellCuHalf{
+  transition:opacity .35s,filter .35s,box-shadow .35s,background 1.8s
+}
+#daniell .battery-card.story-mode .daniell-flow span{animation:none}
+#daniell .battery-card.story-step-3 .daniell-flow span{
+  animation:flow 1.6s linear infinite!important
+}
+#daniell .battery-card.story-step-2 .daniell-zn span{
+  animation:popOut 1.2s ease both!important
+}
+#daniell .battery-card.story-step-4 .moving-cu-ion{
+  animation:cuIonToElectrode 3s ease-in-out infinite!important
+}
+#daniell .battery-card.story-step-4 .cu-electrons{
+  animation:showCuElectrons 3s ease-in-out infinite!important
+}
+#daniell .battery-card.story-step-4 .cu-atom{
+  animation:cuAtomForm 3s ease-in-out infinite!important
+}
+#daniell .battery-card.story-step-4 .cu-caption{
+  animation:cuCaption 3s ease-in-out infinite!important
+}
+#daniell .battery-card.story-step-4 .cu-reaction-arrow{
+  animation:cuArrowPulse 3s ease-in-out infinite!important
+}
+#daniell .battery-card.story-step-4 .deposit{
+  animation:depositGrow 3s ease-in-out infinite!important
+}
+#daniell .battery-card.story-step-5 .copper-half{
+  background:linear-gradient(to top,rgba(120,190,230,.14) 0 70%,transparent 70%)!important
+}
+#daniell .battery-card.story-step-5 .meter-bar i{
+  width:28%!important;
+  opacity:.4!important
+}
+#daniell .battery-card.story-step-5 .cu-background-ions span{
+  opacity:.18!important
+}
+
+@media(max-width:760px){
+  .story-progress{grid-template-columns:1fr 1fr}
+  .story-step:last-child{grid-column:1 / -1}
+}
+
+
+/* ===== Ver.4.1 : Daniell cell wire/electrode alignment ===== */
+
+/*
+  The two outer legs of the U-shaped wire now sit directly above
+  the centers of the Zn and Cu metal plates.
+  Desktop grid:
+    1fr | 140px cellophane | 1fr, with 8px gaps
+*/
+#daniell .daniell-scene{
+  --daniell-middle-total: 156px; /* 140px middle + 8px + 8px gaps */
+}
+
+#daniell .daniell-wire{
+  left: calc(25% - 39px) !important;
+  right: calc(25% - 39px) !important;
+  top: 28px !important;
+  height: 105px !important;
+  margin: 0 !important;
+}
+
+/* Keep the plates centered in each half-cell. */
+#daniell .half-cell .zinc-electrode,
+#daniell .half-cell .copper-electrode{
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Make the wire visually meet the top of each metal plate. */
+#daniell .daniell-wire::before,
+#daniell .daniell-wire::after{
+  content:"";
+  position:absolute;
+  bottom:-5px;
+  width:6px;
+  height:12px;
+  background:#404c57;
+  border-radius:0 0 3px 3px;
+}
+#daniell .daniell-wire::before{left:-6px}
+#daniell .daniell-wire::after{right:-6px}
+
+@media(max-width:760px){
+  /*
+    Mobile grid:
+      1fr | 70px cellophane | 1fr, with 2px gaps.
+    Center of each outer column = 25% - 18.5px.
+  */
+  #daniell .daniell-wire{
+    left: calc(25% - 18.5px) !important;
+    right: calc(25% - 18.5px) !important;
+    height: 151px !important;
+  }
+
+  #daniell .half-cell .zinc-electrode,
+  #daniell .half-cell .copper-electrode{
+    left:50% !important;
+    right:auto !important;
+    transform:translateX(-50%) !important;
+  }
+}

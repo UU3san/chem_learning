@@ -45,30 +45,30 @@
       </div>
 
       <div class="grid two">
-        <article class="card lesson ion-loop-card">
+        <article class="card lesson">
           <h3>電子を失うと ＋イオン</h3>
-          <div class="ion-stage ion-auto-stage" aria-label="亜鉛が電子を2個失って亜鉛イオンになる自動アニメーション">
-            <div class="ion-cycle">
-              <div class="particle atom zinc auto-zinc">
-                <div class="core">Zn</div>
-                <div class="electron e-a auto-e1">e⁻</div>
-                <div class="electron e-b auto-e2">e⁻</div>
+          <div class="ion-stage">
+            <div class="particle atom zinc" id="zincAtom">
+              <div class="core">Zn</div>
+              <div class="electron e-a">e⁻</div>
+              <div class="electron e-b">e⁻</div>
+            </div>
+            <div class="arrow">→</div>
+            <div class="ion-result-wrap hidden" id="zincIonWrap">
+              <div class="particle ion" id="zincIon">
+                <div class="core">Zn²⁺</div>
               </div>
-
-              <div class="arrow auto-arrow">→</div>
-
-              <div class="ion-result-wrap auto-ion-result">
-                <div class="particle ion auto-zinc-ion">
-                  <div class="core">Zn²⁺</div>
-                </div>
-                <div class="released-electrons auto-released" aria-label="放出された電子2個">
-                  <span>e⁻</span><span>e⁻</span>
-                </div>
+              <div class="released-electrons" aria-label="放出された電子2個">
+                <span>e⁻</span><span>e⁻</span>
               </div>
             </div>
           </div>
           <div class="equation">Zn → Zn²⁺ + 2e⁻</div>
-          <p class="explain">① Znからe⁻が2個出る → ② Zn²⁺になる → ③ 数秒後に元のZnへ戻る、を自動で繰り返します。</p>
+          <div class="battery-controls ion-controls">
+            <button id="ionizeBtn" class="primary action" data-action="ionize">電子を2個出してみる</button>
+            <button id="ionResetBtn" class="ghost-btn action" data-action="reset-ion">↺ リセット</button>
+          </div>
+          <p class="explain">「電子を2個出してみる」を押すと、Zn²⁺と放出されたe⁻が2個表示されます。リセットで元のZnに戻ります。</p>
         </article>
 
         <article class="card lesson">
@@ -158,10 +158,18 @@
 
       <article class="card battery-card">
         <div class="battery-controls">
-          <button class="primary action" data-action="run-daniell">▶ 動かして見る</button>
-          <button class="ghost-btn action" data-action="reset-daniell">↺ リセット</button>
+          <button class="primary action" data-action="run-daniell-story">▶ 順番に見る</button>
+          <button class="ghost-btn action" data-action="reset-daniell-story">↺ リセット</button>
         </div>
-        <div class="dissociation-panel daniell-dissociation">
+        <div class="story-progress" id="daniellStoryProgress">
+          <div class="story-step" data-story="1"><b>①</b><span>水溶液が電離</span></div>
+          <div class="story-step" data-story="2"><b>②</b><span>ZnがZn²⁺になる</span></div>
+          <div class="story-step" data-story="3"><b>③</b><span>電子が銅へ流れる</span></div>
+          <div class="story-step" data-story="4"><b>④</b><span>Cu²⁺がCuになる</span></div>
+          <div class="story-step" data-story="5"><b>⑤</b><span>青色が薄くなる</span></div>
+        </div>
+        <div class="story-message" id="daniellStoryMessage">「順番に見る」を押すと、反応を1つずつ追えます。</div>
+        <div class="dissociation-panel daniell-dissociation" id="daniellDissociation">
           <div class="dissociation-title">2つの水溶液は、それぞれイオンに分かれている</div>
           <div class="dissociation-grid">
             <div>
@@ -180,12 +188,12 @@
         </div>
 
         <div class="daniell-scene">
-          <div class="wire daniell-wire">
+          <div class="wire daniell-wire" id="daniellWire">
             <div class="electron-flow daniell-flow" aria-hidden="true"><span>e⁻</span><span>e⁻</span><span>e⁻</span></div>
             <div class="bulb">💡</div>
           </div>
-          <div class="half-cell">
-            <div class="electrode zinc-electrode">
+          <div class="half-cell" id="daniellZnHalf">
+            <div class="electrode zinc-electrode story-zinc-electrode">
               <span class="sign minus">−</span><strong>Zn</strong><small>亜鉛</small>
             </div>
             <div class="solution-label">硫酸亜鉛水溶液</div>
@@ -193,13 +201,13 @@
             <div class="ions daniell-sulfate left-sulfate"><span>SO₄²⁻</span><span>SO₄²⁻</span></div>
           </div>
           <div class="bridge cellophane"><span>セロファン<br><small>イオンは通れる</small></span></div>
-          <div class="half-cell copper-half">
+          <div class="half-cell copper-half" id="daniellCuHalf">
             <div class="electrode copper-electrode">
               <span class="sign plus">＋</span><strong>Cu</strong><small>銅</small>
               <div class="deposit" aria-hidden="true"></div>
             </div>
             <div class="solution-label">硫酸銅水溶液</div>
-            <div class="cu-reaction-lane" aria-label="銅イオンが電子を受け取り銅原子になるアニメーション">
+            <div class="cu-reaction-lane" id="cuReactionLane" aria-label="銅イオンが電子を受け取り銅原子になるアニメーション">
               <div class="cu-ion moving-cu-ion">Cu²⁺</div>
               <div class="cu-electrons"><span>e⁻</span><span>e⁻</span></div>
               <div class="cu-reaction-arrow">＋ 2e⁻ →</div>
@@ -208,7 +216,7 @@
             </div>
             <div class="ions cu-ions cu-background-ions"><span>Cu²⁺</span><span>Cu²⁺</span><span>Cu²⁺</span></div>
             <div class="ions daniell-sulfate right-sulfate"><span>SO₄²⁻</span><span>SO₄²⁻</span></div>
-            <div class="blue-meter"><span>Cu²⁺が減る</span><div class="meter-bar"><i></i></div><small>青色がだんだん薄くなる</small></div>
+            <div class="blue-meter" id="blueMeter"><span>Cu²⁺が減る</span><div class="meter-bar"><i></i></div><small>青色がだんだん薄くなる</small></div>
           </div>
         </div>
 
@@ -297,7 +305,7 @@
 </main>
 
   <footer>
-    <p>中学化学 学習Webアプリ Ver.3 ｜ GitHub Pages対応</p>
+    <p>中学化学 学習Webアプリ Ver.4.1 ｜ GitHub Pages対応</p>
   </footer>
 
   <script src="app.js"></script>
