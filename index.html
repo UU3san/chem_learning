@@ -45,27 +45,30 @@
       </div>
 
       <div class="grid two">
-        <article class="card lesson">
+        <article class="card lesson ion-loop-card">
           <h3>電子を失うと ＋イオン</h3>
-          <div class="ion-stage">
-            <div class="particle atom zinc" id="zincAtom">
-              <div class="core">Zn</div>
-              <div class="electron e-a">e⁻</div>
-              <div class="electron e-b">e⁻</div>
-            </div>
-            <div class="arrow">→</div>
-            <div class="ion-result-wrap hidden" id="zincIonWrap">
-              <div class="particle ion" id="zincIon">
-                <div class="core">Zn²⁺</div>
+          <div class="ion-stage ion-auto-stage" aria-label="亜鉛が電子を2個失って亜鉛イオンになる自動アニメーション">
+            <div class="ion-cycle">
+              <div class="particle atom zinc auto-zinc">
+                <div class="core">Zn</div>
+                <div class="electron e-a auto-e1">e⁻</div>
+                <div class="electron e-b auto-e2">e⁻</div>
               </div>
-              <div class="released-electrons" aria-label="放出された電子2個">
-                <span>e⁻</span><span>e⁻</span>
+
+              <div class="arrow auto-arrow">→</div>
+
+              <div class="ion-result-wrap auto-ion-result">
+                <div class="particle ion auto-zinc-ion">
+                  <div class="core">Zn²⁺</div>
+                </div>
+                <div class="released-electrons auto-released" aria-label="放出された電子2個">
+                  <span>e⁻</span><span>e⁻</span>
+                </div>
               </div>
             </div>
           </div>
           <div class="equation">Zn → Zn²⁺ + 2e⁻</div>
-          <button id="ionizeBtn" class="primary action" data-action="ionize">電子を2個出してみる</button>
-          <p class="explain">亜鉛原子が電子を2個失うと、亜鉛イオンになります。数秒後に元のZnへ戻ります。</p>
+          <p class="explain">① Znからe⁻が2個出る → ② Zn²⁺になる → ③ 数秒後に元のZnへ戻る、を自動で繰り返します。</p>
         </article>
 
         <article class="card lesson">
@@ -129,7 +132,7 @@
             </div>
             <div class="ions zn-ions" aria-hidden="true"><span>Zn²⁺</span><span>Zn²⁺</span></div>
             <div class="ions h-ions" aria-hidden="true"><span>H⁺</span><span>H⁺</span><span>H⁺</span></div>
-            <div class="ions sulfate-ions" aria-hidden="true"><span>SO₄²⁻</span><span>SO₄²⁻</span></div>
+            <div class="ions sulfate-ions solution-sulfate" aria-hidden="true"><span>SO₄²⁻</span><span>SO₄²⁻</span></div>
             <div class="hydrogen-atoms" aria-hidden="true"><span>H</span><span>H</span></div>
             <div class="hydrogen-molecule" aria-hidden="true">H₂ ↑</div>
           </div>
@@ -196,7 +199,14 @@
               <div class="deposit" aria-hidden="true"></div>
             </div>
             <div class="solution-label">硫酸銅水溶液</div>
-            <div class="ions cu-ions"><span>Cu²⁺</span><span>Cu²⁺</span><span>Cu²⁺</span><span>Cu²⁺</span></div>
+            <div class="cu-reaction-lane" aria-label="銅イオンが電子を受け取り銅原子になるアニメーション">
+              <div class="cu-ion moving-cu-ion">Cu²⁺</div>
+              <div class="cu-electrons"><span>e⁻</span><span>e⁻</span></div>
+              <div class="cu-reaction-arrow">＋ 2e⁻ →</div>
+              <div class="cu-atom">Cu</div>
+              <div class="cu-caption">銅原子になって<br>銅板に付着</div>
+            </div>
+            <div class="ions cu-ions cu-background-ions"><span>Cu²⁺</span><span>Cu²⁺</span><span>Cu²⁺</span></div>
             <div class="ions daniell-sulfate right-sulfate"><span>SO₄²⁻</span><span>SO₄²⁻</span></div>
             <div class="blue-meter"><span>Cu²⁺が減る</span><div class="meter-bar"><i></i></div><small>青色がだんだん薄くなる</small></div>
           </div>
@@ -287,7 +297,7 @@
 </main>
 
   <footer>
-    <p>中学化学 学習Webアプリ Ver.2 ｜ GitHub Pages対応</p>
+    <p>中学化学 学習Webアプリ Ver.3 ｜ GitHub Pages対応</p>
   </footer>
 
   <script src="app.js"></script>

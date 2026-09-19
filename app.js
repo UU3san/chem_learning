@@ -31,31 +31,7 @@ function setRunning(selector,on=true){
 document.querySelectorAll('.action').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const a=btn.dataset.action;
-    if(a==='ionize'){
-      const atom=document.getElementById('zincAtom');
-      const wrap=document.getElementById('zincIonWrap');
-      const btn=document.getElementById('ionizeBtn');
-      if(btn.disabled) return;
-      btn.disabled=true;
-      atom.classList.remove('ionizing');
-      wrap.classList.add('hidden');
-
-      requestAnimationFrame(()=>requestAnimationFrame(()=>{
-        atom.classList.add('ionizing');
-        setTimeout(()=>{
-          atom.classList.add('hidden');
-          wrap.classList.remove('hidden');
-        },650);
-      }));
-
-      speak('亜鉛原子が電子を2個失うと、亜鉛イオンになります。右にある電子2個は、亜鉛が放出した電子です。');
-
-      setTimeout(()=>{
-        wrap.classList.add('hidden');
-        atom.classList.remove('hidden','ionizing');
-        btn.disabled=false;
-      },4200);
-    }
+    
     if(a==='run-volta'){
       setRunning('#volta .battery-card',true);
       speak('まず、硫酸は水中で電離して水素イオンと硫酸イオンになります。亜鉛が電子を出し、電子は導線を通って銅へ進みます。水素イオンは電子を受け取り、いったん水素原子になり、2個が結びついて水素分子H2として気体になります。');
@@ -63,7 +39,7 @@ document.querySelectorAll('.action').forEach(btn=>{
     if(a==='reset-volta'){ setRunning('#volta .battery-card',false); speechSynthesis.cancel(); }
     if(a==='run-daniell'){
       setRunning('#daniell .battery-card',true);
-      speak('ダニエル電池では、硫酸亜鉛水溶液と硫酸銅水溶液がそれぞれイオンに分かれています。亜鉛が電子を出し、電子は銅へ移動します。銅イオンが電子を受け取って銅原子になり銅板に付着するので、水溶液中の銅イオンが減り、青色が少しずつ薄くなります。');
+      speak('ダニエル電池では、硫酸亜鉛水溶液と硫酸銅水溶液がそれぞれイオンに分かれています。亜鉛が電子を出し、電子は導線を通って銅板へ移動します。銅イオン Cu2プラスは銅板へ近づき、電子を2個受け取ってCu原子になります。そのCu原子が銅板に付着します。水溶液中の銅イオンが減るため、青色も少しずつ薄くなります。');
     }
     if(a==='reset-daniell'){ setRunning('#daniell .battery-card',false); speechSynthesis.cancel(); }
   });

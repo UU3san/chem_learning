@@ -200,3 +200,200 @@ footer{text-align:center;color:var(--muted);padding:18px}
   .hydrogen-molecule{right:56px}
   .blue-meter{width:95px;font-size:.6rem;top:8px}
 }
+
+
+/* ===== Ver.3 animation corrections ===== */
+
+/* 1) Zn -> Zn2+ + 2e- : automatic loop, no button */
+.ion-loop-card{overflow:hidden}
+.ion-auto-stage{min-height:230px}
+.ion-cycle{
+  position:relative;
+  width:100%;
+  min-height:180px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+}
+.auto-zinc,.auto-arrow,.auto-ion-result{will-change:opacity,transform}
+.auto-zinc{animation:autoZnAtom 6s ease-in-out infinite}
+.auto-arrow{animation:autoArrow 6s ease-in-out infinite}
+.auto-ion-result{opacity:0;animation:autoIonResult 6s ease-in-out infinite}
+.auto-zinc .auto-e1,.auto-zinc .auto-e2{animation:autoElectronLeave 6s ease-in-out infinite}
+.auto-zinc .auto-e2{animation-name:autoElectronLeave2}
+.auto-released span{animation:autoReleasedGlow 6s ease-in-out infinite}
+
+@keyframes autoZnAtom{
+  0%,14%{opacity:1;transform:scale(1)}
+  28%,60%{opacity:.12;transform:scale(.92)}
+  72%,100%{opacity:1;transform:scale(1)}
+}
+@keyframes autoArrow{
+  0%,12%{opacity:.25}
+  20%,60%{opacity:1;transform:translateX(4px)}
+  72%,100%{opacity:.25;transform:none}
+}
+@keyframes autoIonResult{
+  0%,20%{opacity:0;transform:translateX(-15px) scale(.94)}
+  32%,60%{opacity:1;transform:none}
+  72%,100%{opacity:0;transform:translateX(10px) scale(.96)}
+}
+@keyframes autoElectronLeave{
+  0%,12%{opacity:1;transform:none}
+  28%,60%{opacity:0;transform:translate(175px,-42px) scale(.9)}
+  72%,100%{opacity:1;transform:none}
+}
+@keyframes autoElectronLeave2{
+  0%,12%{opacity:1;transform:none}
+  28%,60%{opacity:0;transform:translate(175px,42px) scale(.9)}
+  72%,100%{opacity:1;transform:none}
+}
+@keyframes autoReleasedGlow{
+  0%,22%{opacity:0;transform:scale(.7)}
+  34%,58%{opacity:1;transform:scale(1)}
+  70%,100%{opacity:0;transform:scale(.7)}
+}
+
+/* 2) SO4^2- must remain visibly inside the liquid */
+.beaker.single{overflow:hidden}
+.solution-sulfate{
+  left:50%!important;
+  right:auto!important;
+  bottom:72px!important;
+  top:auto!important;
+  transform:translateX(-50%)!important;
+  z-index:2;
+}
+.solution-sulfate span{
+  background:#f0f1f4!important;
+  border-color:#9da5ad!important;
+}
+.h-ions{z-index:3}
+.zn-ions{z-index:3}
+
+/* Daniell sulfate ions kept below liquid line */
+.daniell-sulfate{
+  bottom:62px!important;
+  top:auto!important;
+  z-index:2;
+}
+.left-sulfate{right:6px!important}
+.right-sulfate{left:6px!important}
+
+/* 3) Cu2+ -> Cu reaction lane */
+.copper-half{overflow:hidden}
+.cu-reaction-lane{
+  position:absolute;
+  left:10px;
+  right:10px;
+  top:102px;
+  height:86px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  z-index:8;
+  pointer-events:none;
+}
+.cu-ion,.cu-atom{
+  width:54px;height:54px;border-radius:50%;
+  display:grid;place-items:center;
+  font-weight:900;
+  border:2px solid;
+  box-shadow:0 4px 12px rgba(30,80,120,.12);
+}
+.cu-ion{background:#d8edff;border-color:#459bd9;color:#135f96}
+.cu-atom{background:#e7a36a;border-color:#b8672e;color:#5b2e10;opacity:0}
+.cu-electrons{display:flex;gap:2px;opacity:0}
+.cu-electrons span{
+  width:30px;height:30px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#1777cc;color:#fff;font-weight:900;font-size:.68rem
+}
+.cu-reaction-arrow{font-size:.72rem;font-weight:900;color:#315d78;opacity:.45}
+.cu-caption{
+  position:absolute;right:2px;top:62px;
+  font-size:.68rem;font-weight:900;line-height:1.25;
+  background:rgba(255,255,255,.9);padding:4px 6px;border-radius:8px;
+  opacity:0
+}
+.running .moving-cu-ion{
+  animation:cuIonToElectrode 3s ease-in-out infinite;
+}
+.running .cu-electrons{
+  animation:showCuElectrons 3s ease-in-out infinite;
+}
+.running .cu-atom{
+  animation:cuAtomForm 3s ease-in-out infinite;
+}
+.running .cu-caption{
+  animation:cuCaption 3s ease-in-out infinite;
+}
+.running .cu-reaction-arrow{
+  animation:cuArrowPulse 3s ease-in-out infinite;
+}
+@keyframes cuIonToElectrode{
+  0%,12%{transform:translateX(-72px);opacity:1}
+  35%{transform:translateX(-18px);opacity:1}
+  52%,100%{transform:translateX(28px) scale(.75);opacity:0}
+}
+@keyframes showCuElectrons{
+  0%,22%{opacity:0;transform:translateX(10px)}
+  34%,48%{opacity:1;transform:none}
+  58%,100%{opacity:0;transform:translateX(12px)}
+}
+@keyframes cuAtomForm{
+  0%,46%{opacity:0;transform:translateX(-8px) scale(.7)}
+  58%,78%{opacity:1;transform:translateX(18px) scale(1)}
+  100%{opacity:0;transform:translateX(42px) scale(.88)}
+}
+@keyframes cuCaption{
+  0%,54%{opacity:0}
+  64%,84%{opacity:1}
+  100%{opacity:0}
+}
+@keyframes cuArrowPulse{
+  0%,20%{opacity:.25}
+  34%,64%{opacity:1}
+  100%{opacity:.25}
+}
+
+/* background Cu2+ ions gradually disappear while running */
+.running .cu-background-ions span:nth-child(1){animation:fadeCuBackground 5s ease-in-out infinite}
+.running .cu-background-ions span:nth-child(2){animation:fadeCuBackground 5s .8s ease-in-out infinite}
+.running .cu-background-ions span:nth-child(3){animation:fadeCuBackground 5s 1.6s ease-in-out infinite}
+@keyframes fadeCuBackground{
+  0%,20%{opacity:1}
+  55%,75%{opacity:.12}
+  100%{opacity:1}
+}
+
+/* deposit grows in an obvious copper color */
+.deposit{
+  left:-14px!important;
+  bottom:18px!important;
+  width:24px!important;
+  height:38px!important;
+  background:linear-gradient(#efb27b,#ad5c25)!important;
+  opacity:.35!important;
+}
+.running .deposit{
+  animation:depositGrow 3s ease-in-out infinite!important;
+}
+@keyframes depositGrow{
+  0%,45%{height:38px;opacity:.35}
+  62%,84%{height:120px;opacity:1}
+  100%{height:38px;opacity:.35}
+}
+
+@media(max-width:760px){
+  .ion-cycle{gap:12px}
+  .ion-cycle .particle{width:96px;height:96px}
+  .released-electrons span{width:34px;height:34px;font-size:.72rem}
+  .cu-reaction-lane{left:2px;right:2px;top:100px;gap:3px}
+  .cu-ion,.cu-atom{width:42px;height:42px;font-size:.78rem}
+  .cu-electrons span{width:24px;height:24px;font-size:.55rem}
+  .cu-reaction-arrow{font-size:.56rem}
+  .cu-caption{font-size:.55rem}
+}
