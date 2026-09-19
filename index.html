@@ -12,7 +12,7 @@
     <div class="brand">
       <div class="brand-icon" aria-hidden="true">⚡</div>
       <div>
-        <h1>電池とイオンを動かして学ぼう</h1>
+        <h1>電池とイオンを動かして学ぼう <span class="version-badge">Ver.5.3</span></h1>
         <p>中学生向け｜イオン → ボルタ電池 → ダニエル電池 → 比較 → 確認テスト</p>
       </div>
     </div>
@@ -228,16 +228,17 @@
               <div class="deposit" aria-hidden="true"></div>
             </div>
             <div class="solution-label">硫酸銅水溶液</div>
-            <div class="cu-reaction-lane" id="cuReactionLane" aria-label="銅イオンが電子を受け取り銅原子になるアニメーション">
+            <div class="cu-reaction-lane" id="cuReactionLane" aria-label="銅イオンが電子を受け取り銅原子になって銅板に付着するアニメーション">
               <div class="cu-ion moving-cu-ion">Cu²⁺</div>
               <div class="cu-electrons"><span>e⁻</span><span>e⁻</span></div>
               <div class="cu-reaction-arrow">＋ 2e⁻ →</div>
               <div class="cu-atom">Cu</div>
-              <div class="cu-caption">銅原子になって<br>銅板に付着</div>
+              <div class="cu-deposit-target">Cu</div>
+              <div class="cu-caption">Cu原子になって<br>銅板に付着</div>
             </div>
             <div class="ions cu-ions cu-background-ions"><span>Cu²⁺</span><span>Cu²⁺</span><span>Cu²⁺</span></div>
             <div class="ions daniell-sulfate right-sulfate"><span>SO₄²⁻</span><span>SO₄²⁻</span></div>
-            <div class="blue-meter" id="blueMeter"><span>Cu²⁺が減る</span><div class="meter-bar"><i></i></div><small>青色がだんだん薄くなる</small></div>
+            <div class="solution-fade-note" id="blueMeter">Cu²⁺が減ると<br>水溶液の青色が薄くなる</div>
           </div>
         </div>
 
@@ -326,7 +327,7 @@
 </main>
 
   <footer>
-    <p>中学化学 学習Webアプリ Ver.5.2 ｜ GitHub Pages対応</p>
+    <p>中学化学 学習Webアプリ Ver.5.3 ｜ GitHub Pages対応</p>
   </footer>
 
   <script src="app.js"></script>

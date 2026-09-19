@@ -936,3 +936,135 @@ footer{text-align:center;color:var(--muted);padding:18px}
     top:42px!important;
   }
 }
+
+
+/* ===== Ver.5.3 ===== */
+.version-badge{
+  display:inline-block;
+  margin-left:8px;
+  padding:3px 8px;
+  border-radius:999px;
+  background:#0f5aa6;
+  color:#fff;
+  font-size:.58em;
+  vertical-align:middle;
+  letter-spacing:.02em;
+}
+
+/* Step 4: make Cu atom visibly become part of the copper electrode */
+.cu-deposit-target{
+  position:absolute;
+  right:22px;
+  top:18px;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#d98342;
+  border:2px solid #a95220;
+  color:#fff;
+  font-weight:900;
+  opacity:0;
+  transform:scale(.55);
+  box-shadow:0 4px 10px rgba(145,75,26,.25);
+}
+
+#daniell .battery-card.story-step-4 .cu-deposit-target{
+  animation:cuDepositTargetV53 4.2s ease-in-out infinite!important;
+}
+
+@keyframes cuDepositTargetV53{
+  0%,52%{opacity:0;transform:translateX(-34px) scale(.55)}
+  62%{opacity:1;transform:translateX(-10px) scale(.9)}
+  74%,88%{opacity:1;transform:translateX(18px) scale(1)}
+  100%{opacity:0;transform:translateX(18px) scale(1)}
+}
+
+/* Make the Cu atom move toward the electrode before it disappears */
+#daniell .battery-card.story-step-4 .cu-atom{
+  animation:cuAtomToPlateV53 4.2s ease-in-out infinite!important;
+}
+@keyframes cuAtomToPlateV53{
+  0%,44%{opacity:0;transform:translateX(-8px) scale(.7)}
+  56%{opacity:1;transform:translateX(0) scale(1)}
+  72%{opacity:1;transform:translateX(44px) scale(.92)}
+  82%,100%{opacity:0;transform:translateX(62px) scale(.82)}
+}
+
+/* Copper deposit on the actual plate becomes thicker in step 4 */
+#daniell .battery-card.story-step-4 .copper-electrode .deposit{
+  animation:depositGrowV53 4.2s ease-in-out infinite!important;
+}
+@keyframes depositGrowV53{
+  0%,48%{height:36px;opacity:.35}
+  66%,88%{height:125px;opacity:1}
+  100%{height:36px;opacity:.35}
+}
+
+/* Step 5: fade the actual CuSO4 solution in the beaker */
+#daniell .copper-half{
+  background:linear-gradient(to top,rgba(40,145,220,.42) 0 70%,transparent 70%)!important;
+}
+#daniell .battery-card.story-step-5 .copper-half{
+  animation:cuSolutionFadeV53 6s ease-in-out infinite!important;
+}
+@keyframes cuSolutionFadeV53{
+  0%,10%{
+    background:linear-gradient(to top,rgba(40,145,220,.42) 0 70%,transparent 70%);
+  }
+  65%,82%{
+    background:linear-gradient(to top,rgba(155,210,239,.16) 0 70%,transparent 70%);
+  }
+  100%{
+    background:linear-gradient(to top,rgba(40,145,220,.42) 0 70%,transparent 70%);
+  }
+}
+
+/* Background Cu2+ ions visibly decrease during step 5 */
+#daniell .battery-card.story-step-5 .cu-background-ions span:nth-child(1){
+  animation:cuIonFadeOutV53 6s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-5 .cu-background-ions span:nth-child(2){
+  animation:cuIonFadeOutV53 6s .5s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-5 .cu-background-ions span:nth-child(3){
+  animation:cuIonFadeOutV53 6s 1s ease-in-out infinite!important;
+}
+@keyframes cuIonFadeOutV53{
+  0%,22%{opacity:1}
+  58%,82%{opacity:.08}
+  100%{opacity:1}
+}
+
+.solution-fade-note{
+  position:absolute;
+  right:8px;
+  top:18px;
+  width:126px;
+  padding:7px 8px;
+  border-radius:10px;
+  background:rgba(255,255,255,.9);
+  border:1px solid #9cc7e3;
+  color:#17608f;
+  font-size:.68rem;
+  font-weight:900;
+  text-align:center;
+  z-index:6;
+}
+#daniell .battery-card.story-step-5 .solution-fade-note{
+  animation:fadeNotePulseV53 1.2s ease-in-out infinite alternate;
+}
+@keyframes fadeNotePulseV53{
+  from{transform:scale(1)}
+  to{transform:scale(1.05)}
+}
+
+/* Disable legacy bar-specific behavior if any remains */
+#daniell .battery-card.story-step-5 .meter-bar i{width:auto!important;opacity:1!important}
+
+@media(max-width:760px){
+  .version-badge{font-size:.5em;margin-left:4px}
+  .cu-deposit-target{right:8px;width:34px;height:34px;font-size:.72rem}
+  .solution-fade-note{width:94px;font-size:.56rem;right:4px}
+}
