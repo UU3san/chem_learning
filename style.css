@@ -1916,3 +1916,429 @@ footer{text-align:center;color:var(--muted);padding:18px}
   .attach-equals{left:41px!important}
   .attach-to-plate{left:91px!important}
 }
+
+
+/* =========================================================
+   Ver.5.7
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   VOLTA Zn reaction: large visible animation beside Zn plate
+   --------------------------------------------------------- */
+
+/* Hide all older Volta Zn demo systems. */
+.volta-zinc-demo,
+.volta-zinc-same-animation,
+.volta-zn-reaction-lane,
+.volta-zn-source,
+.volta-zn-ion,
+.volta-zn-arrow,
+.volta-electron-path,
+.volta-released-electrons,
+.volta-reaction-label{
+  display:none!important;
+}
+
+#volta .beaker.single{
+  overflow:hidden!important;
+}
+
+.volta-zinc-stage{
+  position:absolute;
+  left:70px;
+  top:55px;
+  width:250px;
+  height:230px;
+  z-index:25;
+  pointer-events:none;
+}
+
+/* Zn atom visibly sits at the RIGHT surface of the Zn metal plate. */
+.volta-zinc-surface-atom{
+  position:absolute;
+  left:28px;
+  top:112px;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#cfd6dc;
+  border:2px solid #6f7d87;
+  color:#26343e;
+  font-weight:900;
+  opacity:0;
+  box-shadow:0 4px 12px rgba(40,70,90,.18);
+}
+
+/* New Zn2+ appears in the solution to the right of the plate. */
+.volta-zinc-created-ion{
+  position:absolute;
+  left:125px;
+  top:155px;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#edf1f3;
+  border:2px solid #8698a6;
+  color:#334e5f;
+  font-weight:900;
+  opacity:0;
+  box-shadow:0 4px 12px rgba(40,70,90,.15);
+}
+.volta-zinc-ion-arrow{
+  position:absolute;
+  left:91px;
+  top:139px;
+  font-size:1.25rem;
+  font-weight:900;
+  color:#41677e;
+  opacity:0;
+  transform:rotate(25deg);
+}
+
+/* Track is visually aligned over the zinc plate. */
+.volta-zinc-electron-track{
+  position:absolute;
+  left:35px;
+  top:0;
+  width:105px;
+  height:130px;
+  opacity:0;
+}
+.volta-zinc-electron-track .track-line{
+  position:absolute;
+  left:18px;
+  bottom:0;
+  width:5px;
+  height:112px;
+  background:linear-gradient(to top,#7a8790,#404c57);
+  border-radius:999px;
+}
+.volta-zinc-electron-track .track-line::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-7px;
+  width:13px;
+  height:13px;
+  border-top:4px solid #404c57;
+  border-right:4px solid #404c57;
+  transform:translateX(-50%) rotate(-45deg);
+}
+.volta-zinc-electron-track .track-caption{
+  position:absolute;
+  left:32px;
+  top:18px;
+  width:110px;
+  padding:4px 6px;
+  background:rgba(255,255,255,.92);
+  border-radius:8px;
+  color:#405967;
+  font-size:.56rem;
+  font-weight:900;
+  line-height:1.2;
+}
+
+/* The electrons begin at the Zn surface and move ONLY vertically upward,
+   visually inside the metal plate, toward the wire connection. */
+.volta-zinc-electrons{
+  position:absolute;
+  left:37px;
+  top:120px;
+  display:flex;
+  gap:3px;
+  opacity:0;
+}
+.volta-zinc-electrons span{
+  width:29px;
+  height:29px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#1777cc;
+  color:#fff;
+  font-size:.62rem;
+  font-weight:900;
+  box-shadow:0 0 0 2px rgba(255,255,255,.62);
+}
+.volta-zinc-equation{
+  position:absolute;
+  left:108px;
+  bottom:6px;
+  padding:4px 7px;
+  border-radius:8px;
+  background:rgba(255,255,255,.94);
+  border:1px solid #cbd9e3;
+  font-size:.69rem;
+  font-weight:900;
+  white-space:nowrap;
+  opacity:0;
+}
+
+/* Strong, slow, obvious motion. */
+#volta .battery-card.running .volta-zinc-surface-atom{
+  animation:voltaZnSurfaceAtomV57 6.2s ease-in-out infinite!important;
+}
+#volta .battery-card.running .volta-zinc-created-ion{
+  animation:voltaZnIonIntoWaterV57 6.2s ease-in-out infinite!important;
+}
+#volta .battery-card.running .volta-zinc-ion-arrow{
+  animation:voltaZnArrowV57 6.2s ease-in-out infinite!important;
+}
+#volta .battery-card.running .volta-zinc-electron-track{
+  animation:voltaZnTrackV57 6.2s ease-in-out infinite!important;
+}
+#volta .battery-card.running .volta-zinc-electrons{
+  animation:voltaZnElectronsInsideMetalV57 6.2s ease-in-out infinite!important;
+}
+#volta .battery-card.running .volta-zinc-equation{
+  animation:voltaZnEquationV57 6.2s ease-in-out infinite!important;
+}
+
+@keyframes voltaZnSurfaceAtomV57{
+  0%,14%{opacity:1;transform:translate(0,0) scale(1)}
+  28%{opacity:1;transform:translate(18px,12px) scale(.96)}
+  42%,100%{opacity:0;transform:translate(70px,42px) scale(.78)}
+}
+@keyframes voltaZnIonIntoWaterV57{
+  0%,34%{opacity:0;transform:translate(-45px,-25px) scale(.72)}
+  48%,78%{opacity:1;transform:translate(0,0) scale(1)}
+  100%{opacity:.25;transform:translate(18px,20px) scale(.92)}
+}
+@keyframes voltaZnArrowV57{
+  0%,24%{opacity:0}
+  36%,62%{opacity:1}
+  76%,100%{opacity:0}
+}
+@keyframes voltaZnTrackV57{
+  0%,25%{opacity:0}
+  36%,82%{opacity:.95}
+  100%{opacity:0}
+}
+@keyframes voltaZnElectronsInsideMetalV57{
+  0%,27%{opacity:0;transform:translateY(0)}
+  38%{opacity:1;transform:translateY(0)}
+  76%{opacity:1;transform:translateY(-112px)}
+  90%,100%{opacity:0;transform:translateY(-126px)}
+}
+@keyframes voltaZnEquationV57{
+  0%,28%{opacity:0}
+  40%,82%{opacity:1}
+  100%{opacity:0}
+}
+
+/* ---------------------------------------------------------
+   DANIELL step 4: electrons originate from Cu metal plate.
+   --------------------------------------------------------- */
+
+/* The attachment demo is anchored to the copper plate.
+   Solution is LEFT, plate is RIGHT. */
+.cu-plate-attachment{
+  left:-165px!important;
+  top:72px!important;
+  width:170px!important;
+  height:100px!important;
+}
+
+/* Cu2+ waits in solution left of the plate. */
+.attach-cu2{
+  left:8px!important;
+  top:34px!important;
+}
+
+/* Electrons now BEGIN at the Cu plate surface on the RIGHT,
+   then move LEFT toward Cu2+. */
+.attach-electrons{
+  left:118px!important;
+  top:8px!important;
+  display:flex!important;
+  flex-direction:row!important;
+  gap:3px!important;
+}
+.attach-electrons small{
+  position:absolute;
+  top:-17px;
+  right:-2px;
+  width:64px;
+  color:#5b6670;
+  font-size:.48rem;
+  font-weight:900;
+  text-align:center;
+}
+.attach-equals{
+  left:58px!important;
+  top:45px!important;
+}
+.attach-cu-atom{
+  left:72px!important;
+  top:34px!important;
+}
+.attach-to-plate{
+  left:121px!important;
+  top:45px!important;
+}
+
+/* Final deposited Cu is exactly at the plate surface. */
+.attached-cu-layer{
+  right:-5px!important;
+  top:20px!important;
+}
+
+/* Disable all earlier step-4 animations for these pieces and replace them. */
+#daniell .battery-card.story-step-4 .attach-cu2{
+  animation:cu2WaitThenReactV57 6.8s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attach-electrons{
+  animation:electronsFromPlateToCu2V57 6.8s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attach-equals{
+  animation:reactionArrowV57 6.8s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attach-cu-atom{
+  animation:cuAtomFormsV57 6.8s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attach-to-plate{
+  animation:cuToPlateArrowV57 6.8s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attached-cu-layer i:nth-child(1){
+  animation:cuDepositsV57 6.8s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attached-cu-layer i:nth-child(2){
+  animation:cuDepositsV57 6.8s .12s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attached-cu-layer i:nth-child(3){
+  animation:cuDepositsV57 6.8s .24s ease-in-out infinite!important;
+}
+
+@keyframes cu2WaitThenReactV57{
+  0%,24%{opacity:1;transform:translateX(0) scale(1)}
+  38%,48%{opacity:1;transform:translateX(25px) scale(.96)}
+  56%,100%{opacity:0;transform:translateX(34px) scale(.78)}
+}
+@keyframes electronsFromPlateToCu2V57{
+  0%,18%{opacity:0;transform:translateX(0)}
+  26%{opacity:1;transform:translateX(0)}
+  44%,50%{opacity:1;transform:translateX(-66px)}
+  58%,100%{opacity:0;transform:translateX(-72px)}
+}
+@keyframes reactionArrowV57{
+  0%,34%{opacity:0}
+  42%,58%{opacity:1}
+  68%,100%{opacity:0}
+}
+@keyframes cuAtomFormsV57{
+  0%,50%{opacity:0;transform:scale(.72)}
+  58%,72%{opacity:1;transform:scale(1)}
+  80%,100%{opacity:0;transform:translateX(42px) scale(.88)}
+}
+@keyframes cuToPlateArrowV57{
+  0%,58%{opacity:0}
+  66%,84%{opacity:1}
+  92%,100%{opacity:0}
+}
+@keyframes cuDepositsV57{
+  0%,76%{opacity:0;transform:scale(.7)}
+  86%,100%{opacity:1;transform:scale(1)}
+}
+
+/* ---------------------------------------------------------
+   DANIELL step 5: use a blue liquid overlay and fade it slowly.
+   Gradient backgrounds can jump in browsers, so opacity is used.
+   --------------------------------------------------------- */
+
+/* Neutral/base solution under the overlay. */
+#daniell .copper-half{
+  background:linear-gradient(to top,rgba(210,235,246,.20) 0 70%,transparent 70%)!important;
+  overflow:hidden!important;
+}
+
+/* The actual visible CuSO4 blue layer. */
+.cuso4-liquid-layer{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:70%;
+  background:rgba(40,145,220,.38);
+  z-index:0;
+  pointer-events:none;
+  opacity:1;
+}
+
+/* Keep electrodes/ions/text above liquid layer. */
+#daniell .copper-half > *:not(.cuso4-liquid-layer){
+  z-index:2;
+}
+#daniell .copper-half .electrode,
+#daniell .copper-half .ions,
+#daniell .copper-half .solution-label,
+#daniell .copper-half .cu-reaction-lane,
+#daniell .copper-half .solution-fade-note{
+  position:absolute;
+}
+
+/* Slow one-way fade: 10 seconds, stays light. */
+#daniell .battery-card.story-step-5 .cuso4-liquid-layer{
+  animation:cuSO4LayerFadeV57 10s linear forwards!important;
+}
+@keyframes cuSO4LayerFadeV57{
+  0%{opacity:1}
+  10%{opacity:.94}
+  20%{opacity:.88}
+  30%{opacity:.82}
+  40%{opacity:.75}
+  50%{opacity:.68}
+  60%{opacity:.60}
+  70%{opacity:.51}
+  80%{opacity:.42}
+  90%{opacity:.33}
+  100%{opacity:.24}
+}
+
+/* Remove old background-fade animation so it cannot jump. */
+#daniell .battery-card.story-step-5 .copper-half{
+  animation:none!important;
+  background:linear-gradient(to top,rgba(210,235,246,.20) 0 70%,transparent 70%)!important;
+}
+
+/* Cu2+ ions reduce at a matching slow pace. */
+#daniell .battery-card.story-step-5 .cu-background-ions span:nth-child(1){
+  animation:cuIonReduceV57 10s linear forwards!important;
+}
+#daniell .battery-card.story-step-5 .cu-background-ions span:nth-child(2){
+  animation:cuIonReduceV57 10s 1.2s linear forwards!important;
+}
+#daniell .battery-card.story-step-5 .cu-background-ions span:nth-child(3){
+  animation:cuIonReduceV57 10s 2.4s linear forwards!important;
+}
+@keyframes cuIonReduceV57{
+  from{opacity:1}
+  to{opacity:.10}
+}
+
+@media(max-width:760px){
+  .volta-zinc-stage{
+    left:32px;
+    top:48px;
+    width:210px;
+    height:200px;
+  }
+  .volta-zinc-surface-atom{left:16px;top:102px}
+  .volta-zinc-created-ion{left:96px;top:132px}
+  .volta-zinc-ion-arrow{left:69px;top:120px}
+  .volta-zinc-electron-track{left:23px}
+  .volta-zinc-electrons{left:24px;top:109px}
+  .volta-zinc-equation{left:84px;font-size:.56rem}
+
+  .cu-plate-attachment{
+    left:-128px!important;
+    width:133px!important;
+  }
+  .attach-electrons{left:88px!important}
+  .attach-cu2{left:4px!important}
+  .attach-cu-atom{left:56px!important}
+  .attach-to-plate{left:95px!important}
+}
