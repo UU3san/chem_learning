@@ -1307,3 +1307,217 @@ footer{text-align:center;color:var(--muted);padding:18px}
   .volta-reaction-label{left:34px;font-size:.56rem}
   .volta-electron-path .path-label{width:72px;font-size:.47rem}
 }
+
+
+/* ===== Ver.5.5 ===== */
+
+/* -----------------------------------------------------------
+   VOLTA: exact same visual idea/keyframes as Daniell step ②
+   ----------------------------------------------------------- */
+#volta .volta-zinc-same-animation{
+  left:42px;
+  top:95px;
+  width:220px;
+  height:120px;
+  transform:none;
+}
+
+/* Use the same Zn -> Zn2+ keyframes as Daniell */
+#volta .battery-card.running .volta-zinc-same-animation .zn-source-atom{
+  animation:znAtomLeavesPlate 4.8s ease-in-out infinite!important;
+}
+#volta .battery-card.running .volta-zinc-same-animation .zn-new-ion{
+  animation:znIonAppearsInSolution 4.8s ease-in-out infinite!important;
+}
+#volta .battery-card.running .volta-zinc-same-animation .zn-to-ion-arrow{
+  animation:znArrowShow 4.8s ease-in-out infinite!important;
+}
+#volta .battery-card.running .volta-zinc-same-animation .zn-metal-electron-path{
+  animation:showMetalPathV52 4.8s ease-in-out infinite!important;
+}
+#volta .battery-card.running .volta-zinc-same-animation .zn-released-electrons{
+  animation:znElectronsThroughMetalV52 4.8s ease-in-out infinite!important;
+}
+#volta .battery-card.running .volta-zinc-same-animation .zn-reaction-label{
+  animation:znReactionLabel 4.8s ease-in-out infinite!important;
+}
+
+/* Disable the older Ver.5.4 Volta animation completely */
+.volta-zn-reaction-lane,
+.volta-zn-source,
+.volta-zn-ion,
+.volta-zn-arrow,
+.volta-electron-path,
+.volta-released-electrons,
+.volta-reaction-label{
+  display:none!important;
+}
+
+/* -----------------------------------------------------------
+   DANIELL Cu2+ -> Cu: anchor animation to actual Cu electrode
+   ----------------------------------------------------------- */
+
+/* Old free-floating Cu motion is disabled so there is no "escaping" Cu. */
+#daniell .battery-card.story-step-4 .cu-reaction-lane .moving-cu-ion,
+#daniell .battery-card.story-step-4 .cu-reaction-lane .cu-electrons,
+#daniell .battery-card.story-step-4 .cu-reaction-lane .cu-reaction-arrow{
+  opacity:.18!important;
+  animation:none!important;
+}
+#daniell .battery-card.story-step-4 .cu-reaction-lane .cu-caption{
+  opacity:1!important;
+  animation:none!important;
+}
+#daniell .battery-card.story-step-4 .cu-reaction-lane{
+  box-shadow:none!important;
+}
+
+/* The whole attachment demo is positioned from the Cu plate itself. */
+.cu-plate-attachment{
+  position:absolute;
+  left:-125px;          /* solution is to the LEFT of the Cu plate */
+  top:82px;
+  width:132px;
+  height:74px;
+  pointer-events:none;
+  z-index:12;
+}
+
+.attach-cu2,
+.attach-cu-atom{
+  position:absolute;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+}
+.attach-cu2{
+  left:2px;
+  top:17px;
+  background:#d8edff;
+  border:2px solid #459bd9;
+  color:#135f96;
+  opacity:0;
+}
+.attach-cu-atom{
+  left:55px;
+  top:17px;
+  background:#e09a5d;
+  border:2px solid #a95220;
+  color:#fff;
+  opacity:0;
+}
+.attach-electrons{
+  position:absolute;
+  left:43px;
+  top:0;
+  display:flex;
+  gap:3px;
+  opacity:0;
+}
+.attach-electrons span{
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#1777cc;
+  color:#fff;
+  font-size:.54rem;
+  font-weight:900;
+}
+
+/* Copper layers appear exactly on the LEFT surface of the Cu plate. */
+.attached-cu-layer{
+  position:absolute;
+  right:-6px;
+  top:12px;
+  width:18px;
+  height:52px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:2px;
+}
+.attached-cu-layer i{
+  display:block;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#c96f31;
+  border:2px solid #98501f;
+  opacity:0;
+}
+
+/* Stage 4:
+   1. Cu2+ moves RIGHT toward the copper plate.
+   2. electrons are received.
+   3. Cu atom appears just before the plate.
+   4. Cu atom moves RIGHT a short distance into the plate surface.
+   5. deposited Cu remains on the plate surface.
+*/
+#daniell .battery-card.story-step-4 .attach-cu2{
+  animation:attachCuIonToPlateV55 5.2s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attach-electrons{
+  animation:attachElectronsV55 5.2s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attach-cu-atom{
+  animation:attachCuAtomToSurfaceV55 5.2s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attached-cu-layer i:nth-child(1){
+  animation:attachedCuStayV55 5.2s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attached-cu-layer i:nth-child(2){
+  animation:attachedCuStayV55 5.2s .12s ease-in-out infinite!important;
+}
+#daniell .battery-card.story-step-4 .attached-cu-layer i:nth-child(3){
+  animation:attachedCuStayV55 5.2s .24s ease-in-out infinite!important;
+}
+
+/* Keep legacy "deposit" strip quiet so it doesn't conflict with the new attachment visualization. */
+#daniell .battery-card.story-step-4 .copper-electrode .deposit{
+  animation:none!important;
+  opacity:.25!important;
+  height:38px!important;
+}
+
+@keyframes attachCuIonToPlateV55{
+  0%,12%{opacity:1;transform:translateX(0) scale(1)}
+  32%,44%{opacity:1;transform:translateX(42px) scale(.95)}
+  55%,100%{opacity:0;transform:translateX(58px) scale(.76)}
+}
+@keyframes attachElectronsV55{
+  0%,25%{opacity:0;transform:translateY(-18px)}
+  34%,48%{opacity:1;transform:translateY(0)}
+  58%,100%{opacity:0;transform:translateY(7px)}
+}
+@keyframes attachCuAtomToSurfaceV55{
+  0%,47%{opacity:0;transform:translateX(0) scale(.72)}
+  58%{opacity:1;transform:translateX(0) scale(1)}
+  72%,84%{opacity:1;transform:translateX(45px) scale(.92)}
+  90%,100%{opacity:0;transform:translateX(48px) scale(.82)}
+}
+@keyframes attachedCuStayV55{
+  0%,66%{opacity:0;transform:scale(.65)}
+  76%,100%{opacity:1;transform:scale(1)}
+}
+
+@media(max-width:760px){
+  #volta .volta-zinc-same-animation{
+    left:4px;
+    top:96px;
+    width:160px;
+  }
+  .cu-plate-attachment{
+    left:-100px;
+    width:106px;
+    top:82px;
+  }
+  .attach-cu2{width:34px;height:34px;font-size:.66rem;top:20px}
+  .attach-cu-atom{width:34px;height:34px;font-size:.66rem;left:43px;top:20px}
+  .attach-electrons{left:34px}
+  .attached-cu-layer{right:-5px}
+}
