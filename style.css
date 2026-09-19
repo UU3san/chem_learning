@@ -817,3 +817,122 @@ footer{text-align:center;color:var(--muted);padding:18px}
   .zn-reaction-label{font-size:.58rem}
   .preexisting-label{width:82px;font-size:.5rem;bottom:135px}
 }
+
+
+/* ===== Ver.5.2 : electrons move through the Zn metal plate, not through air ===== */
+
+/* The guide line sits over the center of the Zn plate and points to the wire contact. */
+.zn-metal-electron-path{
+  position:absolute;
+  left:50%;
+  top:-40px;
+  width:70px;
+  height:95px;
+  transform:translateX(-50%);
+  z-index:7;
+  opacity:0;
+}
+.zn-metal-electron-path .path-line{
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:5px;
+  height:82px;
+  transform:translateX(-50%);
+  border-radius:999px;
+  background:linear-gradient(to top,#667784,#404c57);
+}
+.zn-metal-electron-path .path-line::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-7px;
+  width:13px;
+  height:13px;
+  border-top:4px solid #404c57;
+  border-right:4px solid #404c57;
+  transform:translateX(-50%) rotate(-45deg);
+}
+.zn-metal-electron-path .path-label{
+  position:absolute;
+  left:50%;
+  top:18px;
+  transform:translateX(12px);
+  width:92px;
+  padding:3px 5px;
+  border-radius:7px;
+  background:rgba(255,255,255,.9);
+  color:#4b5f6d;
+  font-size:.56rem;
+  font-weight:900;
+  line-height:1.2;
+  text-align:left;
+}
+
+/* Start the e- close to the Zn atom / plate center. */
+.zn-released-electrons{
+  left:50%!important;
+  top:42px!important;
+  transform:translateX(2px);
+  z-index:11;
+}
+
+/* Step 2 explicitly shows the conductor path. */
+#daniell .battery-card.story-step-2 .zn-metal-electron-path{
+  animation:showMetalPathV52 4.8s ease-in-out infinite!important;
+}
+
+/* Electrons rise vertically through the zinc metal toward the wire contact.
+   No sideways "flying into air" motion. */
+#daniell .battery-card.story-step-2 .zn-released-electrons{
+  animation:znElectronsThroughMetalV52 4.8s ease-in-out infinite!important;
+}
+
+@keyframes showMetalPathV52{
+  0%,24%{opacity:0}
+  34%,78%{opacity:.9}
+  100%{opacity:0}
+}
+
+@keyframes znElectronsThroughMetalV52{
+  0%,26%{
+    opacity:0;
+    transform:translateX(2px) translateY(0);
+  }
+  36%{
+    opacity:1;
+    transform:translateX(2px) translateY(0);
+  }
+  72%{
+    opacity:1;
+    transform:translateX(2px) translateY(-92px);
+  }
+  86%,100%{
+    opacity:0;
+    transform:translateX(2px) translateY(-108px);
+  }
+}
+
+/* Keep the electron symbols aligned as a pair inside the metal path. */
+.zn-released-electrons span{
+  width:28px!important;
+  height:28px!important;
+  font-size:.62rem!important;
+  box-shadow:0 0 0 2px rgba(255,255,255,.55);
+}
+
+@media(max-width:760px){
+  .zn-metal-electron-path{
+    top:-42px;
+    height:92px;
+  }
+  .zn-metal-electron-path .path-label{
+    transform:translateX(8px);
+    width:76px;
+    font-size:.48rem;
+  }
+  .zn-released-electrons{
+    left:50%!important;
+    top:42px!important;
+  }
+}
